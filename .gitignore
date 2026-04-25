@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+
+# raw image staging (renamed copies live under src/assets/services/)
+pic/

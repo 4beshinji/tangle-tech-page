@@ -17,6 +17,8 @@ export function getStaticPaths() {
 
 const { service, prev, next } = Astro.props;
 
+const totalIndex = String(SERVICES.length).padStart(3, "0");
+
 const heroSrc = service.media?.hero?.src;
 const heroIsImageMeta = heroSrc && typeof heroSrc !== "string";
 
@@ -55,7 +57,7 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
       <div class="lg:col-span-2">
         <p class="mono text-(--color-ink-faint)">
-          <span class="text-(--color-accent)">§</span> {service.index} / 005
+          <span class="text-(--color-accent)">§</span> {service.index} / {totalIndex}
         </p>
         <p class="mono mt-3 text-(--color-ink-mid)">{service.statusLabel}</p>
       </div>
