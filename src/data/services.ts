@@ -390,7 +390,7 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    slug: "NUAI",
+    slug: "nuai",
     index: "005",
     name: "NUAI",
     nameLatin: "NUAI",
