@@ -9,10 +9,11 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 
 ---
 
-## 現状 (2026-04-25)
+## 現状 (2026-04-26)
 
-- 5 サービスのデザイン実装完了 (`auto-bee` / `auto-aqua` / `hems` / `business-ops` / `office-toybox`)
-- ビルド通過、ローカル `pnpm dev` 動作確認済み
+- 6 サービスのデザイン実装完了 (`auto-bee` / `auto-ja` / `auto-aqua` / `hems` / `nuai` / `office-toybox`)
+- コピー文一巡 (index / config / services を 2026-04-26 に改稿)
+- ビルド通過 (`astro check` 0 errors / 9 ページ)、ローカル `pnpm dev` 動作確認済み
 - 動画再生確認済み (auto-aqua の YOLOv11 検出デモ動画 1 本配置)
 - **未デプロイ** (Cloudflare Workers への `wrangler deploy` 未実行)
 - **DNS 未統合** (お名前.com 取得済 / Cloudflare 側未設定)
@@ -72,7 +73,7 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 すべてのサービス見出し直下に常設の専用ライン。装飾ではなく**情報構造** (= このサービスが束ねる分野数) を一目で示す Tangle Tech の意匠的署名。
 
 ```
-003   AUTO BEE   ──   AGR · BIO · IOT · CV · ML · LLM · ECON · EMB
+001   AUTO BEE   ──   AGR · BIO · IOT · CV · ML · LLM · GIS · ECON
 ```
 
 略号は仮置き、用語表は今後整理予定 (TODO 参照)。
@@ -104,7 +105,7 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 | 場所 | 中身 |
 |---|---|
 | `src/config.ts` | 会社名・タグライン・mission・連絡先 |
-| `src/data/services.ts` | **5 サービスの全文言** (name / tagline / pitch / disciplines / highlights / stack / useCases / statusLabel / media) |
+| `src/data/services.ts` | **6 サービスの全文言** (name / tagline / pitch / disciplines / highlights / stack / useCases / statusLabel / media) |
 | `src/pages/index.astro` | トップ静的文言 — ヒーロー / Practice (3 信条 inline 配列) / Works イントロ / About / Contact |
 | `src/pages/services/[slug].astro` | 詳細ページの共通ラベル (A/B/C... 索引、CTA) |
 | `src/pages/gallery/[slug].astro` | ギャラリー専用ページ (動的、`gallery.length > 4` のサービスのみ生成) |
@@ -251,11 +252,11 @@ pnpm dlx wrangler deploy
 │   ├── components/
 │   │   ├── Header.astro
 │   │   └── Footer.astro
-│   ├── data/services.ts            # 5 サービスの全データ + 型
+│   ├── data/services.ts            # 6 サービスの全データ + 型
 │   ├── layouts/Base.astro          # フォント・OG・縦書き索引
 │   ├── pages/
 │   │   ├── index.astro
-│   │   ├── services/[slug].astro   # 動的・5 ページ生成
+│   │   ├── services/[slug].astro   # 動的・6 ページ生成
 │   │   └── gallery/[slug].astro    # 動的・gallery > 4 のときのみ
 │   ├── styles/global.css           # @theme トークン + ユーティリティ
 │   └── config.ts                   # サイト・会社情報
@@ -287,7 +288,7 @@ pnpm dlx wrangler deploy
 
 ### 高優先
 
-- [ ] **コピー文の最終調整** (進行中、index.astro / config.ts / services.ts を直接編集)
+- [x] コピー文の一巡編集 (2026-04-26 — index.astro / config.ts / services.ts)
 - [ ] **ビジュアル素材投入** — 各サービスの hero / gallery 画像・動画 (現状 auto-aqua の 1 本のみ)
 - [ ] `wrangler deploy` で本番公開
 - [ ] お名前.com → Cloudflare DNS 移行 → Custom Domain 紐付け
@@ -312,7 +313,7 @@ pnpm dlx wrangler deploy
 
 1. このドキュメントを通読 (特に「永久禁止」「Discipline Lattice」「メディア追加」)
 2. `pnpm install && pnpm dev` で起動確認
-3. `src/data/services.ts` の `Service` 型と既存 5 サービスのエントリを確認
+3. `src/data/services.ts` の `Service` 型と既存 6 サービスのエントリを確認
 4. `src/styles/global.css` の `@theme` トークンを確認
 5. Cloudflare アカウント (デプロイ権限) の引き継ぎ
 6. お名前.com アカウント (DNS 切替権限) の引き継ぎ
