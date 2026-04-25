@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f5f3ee;
-  --color-ink: #0e0e0c;
-  --color-ink-mid: #5a5852;
-  --color-ink-faint: #a3a098;
-  --color-rule: rgba(14, 14, 12, 0.18);
-  --color-rule-strong: rgba(14, 14, 12, 0.42);
-  --color-accent: #ff3b1c;
+  --color-paper: #2a2622;
+  --color-ink: #ede9dd;
+  --color-ink-mid: #a09c91;
+  --color-ink-faint: #615d56;
+  --color-rule: rgba(237, 233, 221, 0.16);
+  --color-rule-strong: rgba(237, 233, 221, 0.4);
+  --color-accent: #ff6a48;
 
   --font-display:
     "Hubot Sans", "IBM Plex Sans JP", "Hiragino Sans",
@@ -24,18 +24,6 @@
   --tracking-display: -0.025em;
 
   --container-page: 1320px;
-}
-
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-paper: #0c0c0a;
-    --color-ink: #f0ede5;
-    --color-ink-mid: #8b8880;
-    --color-ink-faint: #4a4843;
-    --color-rule: rgba(240, 237, 229, 0.16);
-    --color-rule-strong: rgba(240, 237, 229, 0.4);
-    --color-accent: #ff5a3c;
-  }
 }
 
 * {
