@@ -1,0 +1,165 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { SERVICES } from "../../data/services";
+
+export function getStaticPaths() {
+  const INLINE_MAX = 4;
+  // Only generate for services with more plates than fit inline
+  return SERVICES.filter(
+    s => (s.media?.gallery?.length ?? 0) > INLINE_MAX
+  ).map(service => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const gallery = service.media?.gallery ?? [];
+---
+
+<Base
+  title={`${service.name} — Plates`}
+  description={`${service.name} の図版アーカイブ。${service.pitch}`}
+  sectionLabel={`TT — § ${service.index} / PLATES`}
+>
+  <!-- Breadcrumb -->
+  <section
+    class="mx-auto max-w-(--container-page) px-6 pt-12 pb-6 lg:px-10 lg:pt-16"
+  >
+    <p class="mono flex items-center gap-3 text-(--color-ink-faint)">
+      <a href="/" class="accent-link">Tangle Tech</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#works" class="accent-link">Works</a>
+      <span aria-hidden="true">/</span>
+      <a href={`/services/${service.slug}/`} class="accent-link">
+        § {service.index} {service.name}
+      </a>
+      <span aria-hidden="true">/</span>
+      <span class="text-(--color-ink-mid)">Plates</span>
+    </p>
+  </section>
+
+  <!-- Title -->
+  <section
+    class="mx-auto max-w-(--container-page) px-6 pt-8 pb-16 lg:px-10 lg:pt-16 lg:pb-24"
+  >
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-span-3">
+        <p class="mono text-(--color-ink-faint)">
+          <span class="text-(--color-accent)">§</span> {service.index} / Plates
+        </p>
+        <p class="mono mt-3 text-(--color-ink-mid)">
+          {gallery.length} items
+        </p>
+      </div>
+      <div class="lg:col-span-9">
+        <p class="mono text-(--color-ink-mid)">{service.category}</p>
+        <h1
+          class="display mt-4 text-[clamp(2.5rem,7vw,6rem)] text-(--color-ink)"
+        >
+          {service.name} ─ Plates
+        </h1>
+        <p
+          class="serif-italic mt-6 max-w-3xl text-xl text-(--color-ink-mid) lg:text-2xl"
+        >
+          {service.tagline}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plates — full-bleed ink ground -->
+  <section class="bg-(--color-ink) text-(--color-paper)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28"
+    >
+      <ol class="space-y-20 lg:space-y-28">
+        {
+          gallery.map((g, i) => {
+            const isVideo = g.kind === "video";
+            const isMeta = !isVideo && typeof g.src !== "string";
+            let posterSrc: string | undefined;
+            if (g.kind === "video" && g.poster) {
+              posterSrc =
+                typeof g.poster === "string"
+                  ? g.poster
+                  : (g.poster as any).src;
+            }
+            return (
+              <li class="grid gap-6 lg:grid-cols-12 lg:gap-10">
+                <div class="lg:col-span-2">
+                  <p class="mono text-(--color-paper)/40">
+                    {isVideo && (
+                      <span class="text-(--color-accent)">▶ </span>
+                    )}
+                    PL. {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <p class="mono mt-2 text-(--color-paper)/30">
+                    of {String(gallery.length).padStart(2, "0")}
+                  </p>
+                </div>
+                <figure class="lg:col-span-10">
+                  {isVideo ? (
+                    <video
+                      src={g.src}
+                      poster={posterSrc}
+                      muted={g.autoplay !== false}
+                      autoplay={g.autoplay !== false}
+                      loop={g.loop !== false}
+                      controls={g.controls !== false}
+                      playsinline
+                      preload="metadata"
+                      aria-label={g.alt}
+                      class="w-full"
+                    />
+                  ) : isMeta ? (
+                    <Image
+                      src={g.src as any}
+                      alt={g.alt}
+                      class="w-full"
+                      widths={[640, 960, 1280, 1920]}
+                      sizes="(min-width: 1320px) 1080px, 100vw"
+                    />
+                  ) : (
+                    <img
+                      src={g.src as string}
+                      alt={g.alt}
+                      class="w-full"
+                      loading="lazy"
+                    />
+                  )}
+                  {(g.caption || g.alt) && (
+                    <figcaption class="mono mt-4 text-(--color-paper)/70">
+                      <span class="text-(--color-paper)/40">─</span>{" "}
+                      {g.caption ?? g.alt}
+                    </figcaption>
+                  )}
+                </figure>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Back -->
+  <section class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-16 lg:px-10 lg:py-24"
+    >
+      <a
+        href={`/services/${service.slug}/`}
+        class="group display flex items-baseline gap-4 text-2xl text-(--color-ink) no-underline lg:text-4xl"
+      >
+        <span class="mono text-(--color-ink-mid) transition-transform group-hover:-translate-x-1 group-hover:text-(--color-accent)">
+          ←─
+        </span>
+        <span class="border-b border-(--color-rule-strong) pb-1 transition-colors group-hover:border-(--color-accent) group-hover:text-(--color-accent)">
+          Back to {service.name}
+        </span>
+      </a>
+    </div>
+  </section>
+</Base>

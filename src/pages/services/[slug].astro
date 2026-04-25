@@ -1,0 +1,420 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { SERVICES } from "../../data/services";
+import { COMPANY } from "../../config";
+
+export function getStaticPaths() {
+  return SERVICES.map((service, idx) => {
+    const prev = SERVICES[(idx - 1 + SERVICES.length) % SERVICES.length];
+    const next = SERVICES[(idx + 1) % SERVICES.length];
+    return {
+      params: { slug: service.slug },
+      props: { service, prev, next },
+    };
+  });
+}
+
+const { service, prev, next } = Astro.props;
+
+const heroSrc = service.media?.hero?.src;
+const heroIsImageMeta = heroSrc && typeof heroSrc !== "string";
+
+const GALLERY_INLINE_MAX = 4;
+const galleryAll = service.media?.gallery ?? [];
+const galleryInline = galleryAll.slice(0, GALLERY_INLINE_MAX);
+const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
+---
+
+<Base
+  title={`${service.name} — ${service.tagline}`}
+  description={service.pitch}
+  sectionLabel={`TT — § ${service.index} / ${service.name.toUpperCase()}`}
+>
+  <!-- ============================================================
+       Breadcrumb
+       ============================================================ -->
+  <section
+    class="mx-auto max-w-(--container-page) px-6 pt-12 pb-6 lg:px-10 lg:pt-16"
+  >
+    <p class="mono flex items-center gap-3 text-(--color-ink-faint)">
+      <a href="/" class="accent-link">Tangle Tech</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#works" class="accent-link">Works</a>
+      <span aria-hidden="true">/</span>
+      <span class="text-(--color-ink-mid)">§ {service.index} {service.name}</span>
+    </p>
+  </section>
+
+  <!-- ============================================================
+       Title block
+       ============================================================ -->
+  <section
+    class="mx-auto max-w-(--container-page) px-6 pt-8 pb-20 lg:px-10 lg:pt-16 lg:pb-32"
+  >
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-span-2">
+        <p class="mono text-(--color-ink-faint)">
+          <span class="text-(--color-accent)">§</span> {service.index} / 005
+        </p>
+        <p class="mono mt-3 text-(--color-ink-mid)">{service.statusLabel}</p>
+      </div>
+
+      <div class="lg:col-span-10">
+        <p class="mono text-(--color-ink-mid)">{service.category}</p>
+        <h1
+          class="display lift mt-4 text-[clamp(3rem,9vw,8rem)] text-(--color-ink)"
+        >
+          {service.name}
+        </h1>
+        {
+          service.nameLatin && service.nameLatin !== service.name && (
+            <p class="serif-italic lift delay-1 mt-3 text-2xl text-(--color-ink-mid) sm:text-3xl">
+              {service.nameLatin}
+            </p>
+          )
+        }
+        <p
+          class="serif-italic lift delay-2 mt-8 max-w-3xl text-2xl text-(--color-ink) sm:text-3xl lg:text-4xl"
+        >
+          {service.tagline}
+        </p>
+
+        <div
+          class="lift fade delay-3 mt-12 border-t border-(--color-rule) pt-6"
+        >
+          <div
+            class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-10"
+          >
+            <span class="mono shrink-0 text-(--color-ink-faint)">
+              Disciplines
+            </span>
+            <div class="lattice text-(--color-ink-mid)">
+              {service.disciplines.map(d => <span>{d}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Hero image — INK BAND (white screenshots invert against ink ground)
+       ============================================================ -->
+  {
+    service.media?.hero && heroSrc && (
+      <section class="bg-(--color-ink) text-(--color-paper)">
+        <figure class="mx-auto max-w-(--container-page) px-6 py-14 lg:px-10 lg:py-20">
+          <p class="mono mb-6 text-(--color-paper)/40">
+            <span class="text-(--color-accent)">§</span> Plate ─ Frontispiece
+          </p>
+          {heroIsImageMeta ? (
+            <Image
+              src={heroSrc as any}
+              alt={service.media.hero.alt}
+              class="w-full"
+              widths={[640, 960, 1280, 1920]}
+              sizes="(min-width: 1320px) 1280px, 100vw"
+            />
+          ) : (
+            <img
+              src={heroSrc as string}
+              alt={service.media.hero.alt}
+              class="w-full"
+              loading="lazy"
+            />
+          )}
+          {(service.media.hero.caption || service.media.hero.context) && (
+            <figcaption class="mono mt-5 flex flex-col gap-1 text-(--color-paper)/70 sm:flex-row sm:gap-6">
+              {service.media.hero.caption && (
+                <span>
+                  <span class="text-(--color-paper)/40">FIG. ─</span>{" "}
+                  {service.media.hero.caption}
+                </span>
+              )}
+              {service.media.hero.context && (
+                <span class="text-(--color-paper)/40">
+                  {service.media.hero.context}
+                </span>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      </section>
+    )
+  }
+
+  <!-- ============================================================
+       Pitch (overview)
+       ============================================================ -->
+  <section class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28"
+    >
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-3">
+          <p class="section-index">A / Overview</p>
+        </div>
+        <p
+          class="serif-italic text-2xl text-(--color-ink) leading-[1.55] sm:text-3xl lg:col-span-9 lg:text-4xl"
+        >
+          {service.pitch}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Highlights — numbered editorial entries
+       ============================================================ -->
+  <section class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28"
+    >
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-3">
+          <p class="section-index">B / Features</p>
+        </div>
+        <div class="lg:col-span-9">
+          <ol class="divide-y divide-(--color-rule)">
+            {
+              service.highlights.map((h, i) => (
+                <li class="grid gap-4 py-10 lg:grid-cols-12 lg:gap-6">
+                  <div class="lg:col-span-2">
+                    <span class="serif-italic text-3xl text-(--color-accent)">
+                      {String(i + 1).padStart(2, "0")}.
+                    </span>
+                  </div>
+                  <h3 class="display text-2xl text-(--color-ink) lg:col-span-4 lg:text-3xl">
+                    {h.title}
+                  </h3>
+                  <p class="text-(--color-ink-mid) leading-[1.95] lg:col-span-6">
+                    {h.body}
+                  </p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Specifications — stack + use cases as specimen sheet
+       ============================================================ -->
+  <section class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28"
+    >
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-3">
+          <p class="section-index">C / Specification</p>
+        </div>
+        <div class="grid gap-12 lg:col-span-9 lg:grid-cols-2 lg:gap-10">
+          <div>
+            <p class="mono text-(--color-ink-faint)">— Stack</p>
+            <ul class="mt-5 divide-y divide-(--color-rule)">
+              {
+                service.stack.map(item => (
+                  <li class="flex items-baseline gap-4 py-3 text-(--color-ink-mid)">
+                    <span class="mono shrink-0 text-(--color-ink-faint)">
+                      ─
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <p class="mono text-(--color-ink-faint)">— Use cases</p>
+            <ul class="mt-5 divide-y divide-(--color-rule)">
+              {
+                service.useCases.map(item => (
+                  <li class="flex items-baseline gap-4 py-3 text-(--color-ink-mid)">
+                    <span class="mono shrink-0 text-(--color-ink-faint)">
+                      ─
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Gallery — INK BAND (truncated to 4, links to /gallery/<slug>/ if more)
+       ============================================================ -->
+  {
+    galleryAll.length > 0 && (
+      <section class="bg-(--color-ink) text-(--color-paper)">
+        <div class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28">
+          <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+            <div class="lg:col-span-3">
+              <p class="mono text-(--color-paper)/60">
+                <span class="text-(--color-accent)">§</span> D / Plates
+              </p>
+              {galleryHasMore && (
+                <p class="mono mt-3 text-(--color-paper)/40">
+                  Showing {GALLERY_INLINE_MAX} of {galleryAll.length}
+                </p>
+              )}
+            </div>
+            <div class="grid gap-10 lg:col-span-9 lg:grid-cols-2">
+              {galleryInline.map((g, i) => {
+                const plateNum = `PL. ${String(i + 1).padStart(2, "0")}`;
+                if (g.kind === "video") {
+                  const posterSrc =
+                    g.poster && typeof g.poster !== "string"
+                      ? (g.poster as any).src
+                      : (g.poster as string | undefined);
+                  return (
+                    <figure>
+                      <video
+                        src={g.src}
+                        poster={posterSrc}
+                        muted={g.autoplay !== false}
+                        autoplay={g.autoplay !== false}
+                        loop={g.loop !== false}
+                        controls={g.controls === true}
+                        playsinline
+                        preload="metadata"
+                        aria-label={g.alt}
+                        class="w-full"
+                      />
+                      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
+                        <span class="text-(--color-paper)/40">{plateNum}</span>
+                        <span class="text-(--color-accent)">▶</span>
+                        <span>{g.caption ?? g.alt}</span>
+                      </figcaption>
+                    </figure>
+                  );
+                }
+                const isMeta = typeof g.src !== "string";
+                return (
+                  <figure>
+                    {isMeta ? (
+                      <Image
+                        src={g.src as any}
+                        alt={g.alt}
+                        class="w-full"
+                        widths={[480, 720, 1080]}
+                        sizes="(min-width: 1024px) 480px, 100vw"
+                      />
+                    ) : (
+                      <img
+                        src={g.src as string}
+                        alt={g.alt}
+                        class="w-full"
+                        loading="lazy"
+                      />
+                    )}
+                    <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
+                      <span class="text-(--color-paper)/40">{plateNum}</span>
+                      <span>{g.caption ?? g.alt}</span>
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+
+          {galleryHasMore && (
+            <div class="mt-16 grid gap-6 border-t border-(--color-paper)/15 pt-10 lg:grid-cols-12">
+              <div class="lg:col-span-3" />
+              <a
+                href={`/gallery/${service.slug}/`}
+                class="display group flex items-baseline gap-4 text-2xl text-(--color-paper) no-underline lg:col-span-9 lg:text-4xl"
+              >
+                <span class="border-b border-(--color-paper)/40 pb-1 transition-colors group-hover:border-(--color-accent) group-hover:text-(--color-accent)">
+                  View all {galleryAll.length} plates
+                </span>
+                <span class="mono text-(--color-paper)/60 transition-transform group-hover:translate-x-1 group-hover:text-(--color-accent)">
+                  ─→
+                </span>
+              </a>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ============================================================
+       CTA
+       ============================================================ -->
+  <section class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto max-w-(--container-page) px-6 py-20 lg:px-10 lg:py-28"
+    >
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-3">
+          <p class="section-index">E / Inquiries</p>
+        </div>
+        <div class="lg:col-span-9">
+          <p
+            class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl"
+          >
+            導入・実証実験・受託、
+            <br class="hidden sm:block" />
+            お話しましょう。
+          </p>
+          <a
+            href={`mailto:${COMPANY.email}`}
+            class="serif-italic mt-10 inline-block text-2xl sm:text-3xl"
+          >
+            <span class="accent-link">{COMPANY.email}</span>
+            <span class="caret"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Prev / Next navigation
+       ============================================================ -->
+  <nav class="border-t border-(--color-rule-strong)">
+    <div
+      class="mx-auto grid max-w-(--container-page) gap-px bg-(--color-rule) sm:grid-cols-2"
+    >
+      <a
+        href={`/services/${prev.slug}/`}
+        class="group block bg-(--color-paper) px-6 py-12 no-underline transition-colors hover:bg-(--color-ink) hover:text-(--color-paper) lg:px-10 lg:py-16"
+      >
+        <p class="mono text-(--color-ink-faint) group-hover:text-(--color-paper)/60">
+          ← Prev / § {prev.index}
+        </p>
+        <p
+          class="display mt-3 text-2xl sm:text-3xl lg:text-4xl"
+        >
+          {prev.name}
+        </p>
+        <p class="serif-italic mt-2 text-(--color-ink-mid) group-hover:text-(--color-paper)/80">
+          {prev.tagline}
+        </p>
+      </a>
+      <a
+        href={`/services/${next.slug}/`}
+        class="group block bg-(--color-paper) px-6 py-12 text-right no-underline transition-colors hover:bg-(--color-ink) hover:text-(--color-paper) lg:px-10 lg:py-16"
+      >
+        <p class="mono text-(--color-ink-faint) group-hover:text-(--color-paper)/60">
+          Next / § {next.index} →
+        </p>
+        <p
+          class="display mt-3 text-2xl sm:text-3xl lg:text-4xl"
+        >
+          {next.name}
+        </p>
+        <p class="serif-italic mt-2 text-(--color-ink-mid) group-hover:text-(--color-paper)/80">
+          {next.tagline}
+        </p>
+      </a>
+    </div>
+  </nav>
+</Base>

@@ -1,0 +1,47 @@
+---
+const navItems = [
+  { href: "/#practice", index: "01", label: "Practice" },
+  { href: "/#works", index: "02", label: "Works" },
+  { href: "/#about", index: "03", label: "About" },
+  { href: "/#contact", index: "04", label: "Contact" },
+];
+---
+
+<header
+  class="sticky top-0 z-30 border-b border-(--color-rule) bg-(--color-paper)/92 backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex max-w-(--container-page) items-center justify-between px-6 py-5 lg:px-10"
+  >
+    <a
+      href="/"
+      class="group flex items-baseline gap-3 no-underline outline-none"
+    >
+      <span class="display text-[19px] tracking-[-0.02em] text-(--color-ink)">
+        Tangle Tech
+      </span>
+      <span
+        class="mono hidden text-(--color-ink-faint) sm:inline"
+        aria-hidden="true"
+      >
+        ─ TT
+      </span>
+    </a>
+
+    <nav class="flex items-center gap-6 sm:gap-9">
+      {
+        navItems.map(item => (
+          <a
+            href={item.href}
+            class="mono group flex items-baseline gap-1.5 text-(--color-ink-mid) no-underline transition-colors hover:text-(--color-accent)"
+          >
+            <span class="text-(--color-ink-faint) group-hover:text-(--color-accent)">
+              {item.index}
+            </span>
+            <span class="hidden sm:inline">{item.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
