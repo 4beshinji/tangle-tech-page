@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Abe Shinji — Tangleteck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=IBM+Plex+Sans+JP:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap"
+    />
+    <style>
+      :root {
+        --paper: #f5f3ee;
+        --ink: #0e0e0c;
+        --ink-mid: #5a5852;
+        --ink-faint: #a3a098;
+        --rule: rgba(14, 14, 12, 0.18);
+        --rule-strong: rgba(14, 14, 12, 0.42);
+        --accent: #ff3b1c;
+
+        --display:
+          "Hubot Sans", "IBM Plex Sans JP", "Hiragino Sans",
+          "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+        --sans:
+          "IBM Plex Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+          system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --serif:
+          "Instrument Serif", "Hiragino Mincho ProN", "Yu Mincho",
+          "Cormorant Garamond", serif;
+
+        /* Card geometry. 91×55 mm trim + 3 mm bleed. */
+        --bleed: 3mm;
+        --w: 97mm;
+        --h: 61mm;
+        --safe-x: 6mm; /* 3mm bleed + 3mm safety */
+        --safe-y: 6mm;
+      }
+
+      @page {
+        size: 97mm 61mm;
+        margin: 0;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ddd;
+        font-family: var(--sans);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings:
+          "ss01" on,
+          "cv11" on,
+          "palt" on;
+      }
+
+      .card {
+        width: var(--w);
+        height: var(--h);
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        font-size: 7pt;
+        line-height: 1.5;
+        color: var(--ink);
+      }
+      .card:last-child { page-break-after: auto; }
+
+      /* Inner safe-area frame */
+      .frame {
+        position: absolute;
+        inset: var(--safe-y) var(--safe-x);
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ============== shared utilities ============== */
+      .mono {
+        font-family: var(--mono);
+        font-size: 6pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .mono-sm {
+        font-family: var(--mono);
+        font-size: 5.5pt;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .display {
+        font-family: var(--display);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 0.96;
+        font-feature-settings:
+          "ss01" on,
+          "cv11" on,
+          "ss03" on;
+      }
+      .serif-italic {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+      }
+      .accent { color: var(--accent); }
+      .ink-mid { color: var(--ink-mid); }
+      .ink-faint { color: var(--ink-faint); }
+
+      hr.rule {
+        border: 0;
+        height: 0.3pt;
+        background: var(--rule-strong);
+        margin: 0;
+      }
+
+      .lattice {
+        font-family: var(--mono);
+        font-size: 5.5pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-mid);
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+      .lattice > span + span::before {
+        content: "·";
+        display: inline-block;
+        width: 1.6em;
+        text-align: center;
+        color: var(--ink-faint);
+      }
+
+      /* ============== FRONT ============== */
+      .front .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .front .hero {
+        margin-top: 8mm;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6mm;
+      }
+      .front .hero .names .latin {
+        font-size: 26pt;
+        display: block;
+      }
+      .front .hero .names .jp {
+        display: block;
+        margin-top: 1.4mm;
+        font-family: var(--serif);
+        font-size: 11pt;
+        color: var(--ink-mid);
+        letter-spacing: 0.18em;
+      }
+      .front .hero .title-block {
+        text-align: right;
+        flex-shrink: 0;
+        padding-top: 2mm;
+      }
+      .front .hero .title-block .label {
+        display: block;
+        color: var(--ink-faint);
+        margin-bottom: 1.4mm;
+      }
+      .front .hero .title-block .title {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13pt;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .front .statement {
+        margin-top: auto;
+        margin-bottom: 2.2mm;
+        font-family: var(--mono);
+        font-size: 7pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-mid);
+        line-height: 1.4;
+      }
+      .front .statement .sep {
+        color: var(--ink-faint);
+        display: inline-block;
+        width: 1.6em;
+        text-align: center;
+      }
+      .front .contact {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-top: 2.5mm;
+        border-top: 0.3pt solid var(--rule);
+      }
+      .front .contact .email,
+      .front .contact .url {
+        font-family: var(--mono);
+        font-size: 6.5pt;
+        letter-spacing: 0.04em;
+        text-transform: none;
+      }
+      .front .contact .url { font-weight: 500; }
+      .front .contact .accent {
+        font-family: var(--mono);
+        font-size: 8pt;
+        font-weight: 700;
+      }
+
+      /* ============== BACK ============== */
+      .back .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .back .body {
+        margin-top: 4mm;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .back .tagline {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 16pt;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        margin: 0;
+      }
+      .back .tagline .accent-word {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        color: var(--accent);
+        letter-spacing: 0;
+      }
+      .back .paraphrase {
+        margin-top: 2.5mm;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 9pt;
+        color: var(--ink-mid);
+      }
+      .back .wordmark {
+        margin-top: auto;
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 22pt;
+        letter-spacing: -0.025em;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .back .wordmark .accent { color: var(--accent); }
+      .back .foot {
+        margin-top: 1.6mm;
+        padding-top: 1.8mm;
+        border-top: 0.3pt solid var(--rule);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .back .foot .url {
+        font-family: var(--mono);
+        font-size: 6.5pt;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ============================================================
+         FRONT
+         ============================================================ -->
+    <article class="card front">
+      <div class="frame">
+        <div class="meta">
+          <span class="mono ink-faint">
+            <span class="accent">§</span> Identity
+          </span>
+        </div>
+
+        <hr class="rule" style="margin-top: 1.6mm" />
+
+        <div class="hero">
+          <div class="names">
+            <span class="display latin">ABE SHINJI</span>
+            <span class="jp">安部&nbsp;&nbsp;新司</span>
+          </div>
+        </div>
+
+        <p class="statement">
+          OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep">·</span>Information&nbsp;Theory
+        </p>
+
+        <div class="contact">
+          <span class="email">4beshinji@gmail.com</span>
+          <span class="accent">§</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         BACK
+         ============================================================ -->
+    <article class="card back">
+      <div class="frame">
+        <div class="meta">
+          <span class="mono ink-faint">
+            <span class="accent">§</span> Mission
+          </span>
+        </div>
+
+        <hr class="rule" style="margin-top: 1.6mm" />
+
+        <div class="body">
+          <h2 class="tagline">
+            もつれた課題を、<br />
+            <span class="accent-word">解きほぐす</span>。
+          </h2>
+          <p class="paraphrase">Untangle what is tangled.</p>
+        </div>
+
+        <div class="wordmark">TangleTeck<span class="accent">.</span></div>
+
+        <div class="foot">
+          <span class="url">tangle-tech.com</span>
+          <span class="accent" style="font-family: var(--mono); font-weight: 700">§</span>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>
