@@ -93,14 +93,14 @@ export const SERVICES: Service[] = [
     name: "Auto Bee",
     nameLatin: "Auto Bee",
     category: "Apiculture",
-    tagline: "蜜源GIS分析から環境監視、制御まで。蜂の巣すら溶けだす温暖化時代の養蜂管理。",
+    tagline: "蜂の巣すら溶けだす温暖化時代の養蜂管理。",
     pitch:
       "巣箱の設置位置決定支援からモニタリング・分蜂検知まで、IoT センサー・画像認識・LLM エージェントで一貫管理する自律養蜂システム。",
     disciplines: ["AGR", "BIO", "IOT", "CV", "ML", "LLM", "GIS", "ECON"],
     highlights: [
       {
         title: "巣箱センシングと分蜂リスク検知",
-        body: "重量・巣内温湿度・出入り活動量をリアルタイム監視し、複合スコアで分蜂リスクを算出。30秒サイクルの ReAct ループが異常を即時検知。",
+        body: "重量・巣内温湿度・出入り活動量をリアルタイム監視し、複合スコアで分蜂リスクを算出。ルールベースとReAct ループの併用で即時検知と複雑な判断を両立。",
       },
       {
         title: "蜜源GIS分析",
@@ -108,7 +108,7 @@ export const SERVICES: Service[] = [
       },
       {
         title: "遠隔オペレーション",
-        body: "音声通知 (VOICEVOX 春日部つむぎ) と Discord 連携で、現場へ行かずに異常検知・操作判断を行う運用体制。",
+        body: "各種外部ツール連携で、異常を即座に通知。アクチュエータをその場で制御。だめそうなら……現場にダッシュ！",
       },
     ],
     stack: [
@@ -119,7 +119,7 @@ export const SERVICES: Service[] = [
       "Docker Compose (15+)",
     ],
     useCases: [
-      "都市型小規模養蜂家の見守り自動化",
+      "ESG投資文脈での生態系記録と都市環境改善投資",
       "山間部養蜂家の分蜂検知と遠隔監視",
       "教育・研究機関の養蜂センシング基盤",
     ],
@@ -161,10 +161,10 @@ export const SERVICES: Service[] = [
     name: "Auto JA",
     nameLatin: "Auto JA",
     category: "Multi-domain Farm Platform",
-    tagline: "水耕・養蜂・養殖を、ひとつのAIで束ねる、統合農場プラットフォーム。",
+    tagline: "市場予測とセンサ駆動の農場。最適な作物、最適な出荷タイミング。最大のリターン。",
     pitch:
-      "ReAct ベースの中枢 AI に、水耕栽培・養蜂・陸上養殖のドメインプラグインを差し替えて運用する統合農場プラットフォーム。市場価格スクレイパー (11 データソース) と予測エンジンを内蔵し、生産から経営まで一気通貫。",
-    disciplines: ["AGR", "AQUA", "BIO", "IOT", "CV", "ML", "LLM", "ECON"],
+      "水耕栽培・養蜂・陸上養殖のドメインプラグインを差し替えて運用する統合農場プラットフォーム。市場価格データを用いた予測エンジンを内蔵し、最適な収穫タイミング提案から環境介入まで。生産から経営まで一気通貫。",
+    disciplines: ["AGR", "AQUA", "BIO", "IOT", "CV", "ML", "VLM", "LLM", "ECON"],
     highlights: [
       {
         title: "プラグイン式マルチドメイン",
@@ -172,7 +172,7 @@ export const SERVICES: Service[] = [
       },
       {
         title: "市場予測まで一気通貫",
-        body: "11 データソースの市場価格スクレイパーと予測エンジンを内蔵。生産だけでなく、出荷タイミング・価格トレンド・モデル誤差検証まで同じ画面で扱える。",
+        body: "複数データソースの市場価格を取り込んだ予測エンジンを内蔵。生産だけでなく、出荷タイミング・価格トレンド・モデル誤差検証まで同じ画面で扱える。",
       },
       {
         title: "培地・養液・栽培スケジュールの自動提案",
@@ -329,12 +329,12 @@ export const SERVICES: Service[] = [
     category: "Personal Assistant",
     tagline: "家とくらしに、寄り添う AI。",
     pitch:
-      "家電制御・買い物管理・チャット・知識検索・バイオメトリクスを束ね、3D VRM アバターで応対する家庭向け AI アシスタント。",
+      "家電制御・買い物管理・チャット・知識検索・バイオメトリクスを束ね、3D VRM アバターやPSD立ち絵等で応対する家庭向け AI アシスタント。",
     disciplines: ["IOT", "LLM", "TTS", "3D", "NLP", "BIO", "CV", "KG"],
     highlights: [
       {
         title: "アバター常駐",
-        body: "ダッシュボード上にアバターが常駐し、発話に合わせたモーションとリップシンクで応対。",
+        body: "ダッシュボード上にアバターが常駐し、発話内容に合わせた表情やモーションで応対。",
       },
       {
         title: "ハイブリッド知識検索",
@@ -354,7 +354,7 @@ export const SERVICES: Service[] = [
     ],
     useCases: [
       "在宅勤務者の生活支援エージェント",
-      "高齢者の見守り・声掛け",
+      "高齢者の見守り・声掛け・異常/転倒検知",
       "個人ナレッジの集約と即応検索",
     ],
     status: "beta",
@@ -390,9 +390,9 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    slug: "business-ops",
+    slug: "NUAI",
     index: "005",
-    name: "Business Ops",
+    name: "NUAI",
     nameLatin: "NUAI",
     category: "HR / Governance Platform",
     tagline: "AI と人が、対等に働く組織のための業務基盤。",
@@ -434,14 +434,14 @@ export const SERVICES: Service[] = [
     name: "Office as AI Toybox",
     nameLatin: "SOMS",
     category: "Autonomous Site Operations",
-    tagline: "GPU とセンサーが、オフィスを自律運転する。",
+    tagline: "GPU とセンサーと人間が、オフィスを自律運転する。",
     pitch:
       "拠点ごとに AI ノードを置き、ReAct LLM と多視点カメラ追跡でオフィス空間を監視・運営する自律ハブ。データはノード内に閉じる。",
     disciplines: ["IOT", "CV", "MTMC", "LLM", "FED", "GPU", "EDGE", "AUDIT"],
     highlights: [
       {
         title: "データは 100% ローカル",
-        body: "raw データはノードを離れない。外部クラウド連携は明示オプトイン方式でデータ主権を最優先。",
+        body: "個人情報はオンメモリで揮発。処理はすべてローカル。保存されるデータはすべて統計値。徹底的なプライバシー保護。",
       },
       {
         title: "CoreHub フェデレーション",

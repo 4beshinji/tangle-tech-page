@@ -24,6 +24,6 @@ export const COMPANY = {
   tagline: "もつれた課題を解きほぐす。",
   mission:
     "複雑に絡み合った問題をときほぐし、分断された世界を編み合わせる。",
-  email: "contact@tangle-tech.com",
+  email: "4beshinji@gmail.com",
   domain: "tangle-tech.com",
 } as const;
