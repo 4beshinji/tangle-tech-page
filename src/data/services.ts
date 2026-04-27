@@ -34,6 +34,10 @@ import hemsDashboardAvatar from "@/assets/services/hems/dashboard-avatar.png";
 
 // Office as AI Toybox
 import officeToyboxHero from "@/assets/services/office-toybox/user-dashboard.png";
+import officeToyboxUserDashboardDefault from "@/assets/services/office-toybox/user-dashboard-default.webp";
+import officeToyboxAdminZoneEditor from "@/assets/services/office-toybox/admin-zone-editor.webp";
+import officeToyboxAdminCameraSetup from "@/assets/services/office-toybox/admin-camera-setup.webp";
+import officeToyboxSpatialMonitor from "@/assets/services/office-toybox/spatial-monitor-mtmc.jpg";
 
 export type GalleryImageItem = {
   kind?: "image";
@@ -470,8 +474,32 @@ export const SERVICES: Service[] = [
       hero: {
         src: officeToyboxHero,
         alt: "Office as AI Toybox の利用者向けダッシュボード",
-        caption: "SOMS ─ 利用者向けダッシュボード",
+        caption: "Sushitech2026 出展用カスタム ─ NUNUAI 様向けに提供",
+        context:
+          "完全オフライン前提でチャット側にイベント案内・挨拶・NUNUPC 様紹介を実装。TTS は『顔を向けないと話さない』『通行人数に応じた発話』など対人インタラクトを強化。前夜から指定 PC への OS インストール＋約 250GB のエコシステム導入を貧弱回線下で完遂。流動的な前提と厳しい環境制約の下でも極短期間での開発が可能。",
       },
+      gallery: [
+        {
+          src: officeToyboxUserDashboardDefault,
+          alt: "SOMS 利用者ダッシュボード ─ お願い事一覧と SOMS 報酬",
+          caption: "User Dashboard ─ センサー異常から生成された『お願い事』を SOMS トークン報酬付きで提示",
+        },
+        {
+          src: officeToyboxSpatialMonitor,
+          alt: "Spatial Monitor ─ マルチカメラによる人物追跡ビュー",
+          caption: "Spatial Monitor ─ YOLOv11 MTMC でゾーン横断の人物・デバイス・カメラ視野をリアルタイム可視化",
+        },
+        {
+          src: officeToyboxAdminZoneEditor,
+          alt: "SOMS Admin ─ Zone Editor",
+          caption: "Admin / Zone Editor ─ フロアプラン上にゾーンとセンサー配置を定義し、活動ヒートマップを重畳",
+        },
+        {
+          src: officeToyboxAdminCameraSetup,
+          alt: "SOMS Admin ─ Camera Setup",
+          caption: "Admin / Camera Setup ─ カメラ視野角をフロアにマッピングし、ライブフィードと対応付け",
+        },
+      ],
     },
   },
 ];
