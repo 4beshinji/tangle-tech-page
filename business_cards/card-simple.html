@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Abe Shinji — Tangleteck (simplified type)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=IBM+Plex+Sans+JP:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap"
+    />
+    <style>
+      :root {
+        --paper: #f5f3ee;
+        --ink: #0e0e0c;
+        --ink-mid: #5a5852;
+        --ink-faint: #a3a098;
+        --rule: rgba(14, 14, 12, 0.18);
+        --rule-strong: rgba(14, 14, 12, 0.42);
+        --accent: #ff3b1c;
+
+        --w: 97mm;
+        --h: 61mm;
+        --safe-x: 6mm;
+        --safe-y: 6mm;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ddd;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings: "palt" on;
+      }
+
+      .stage {
+        padding: 18mm 12mm;
+        display: flex;
+        flex-direction: column;
+        gap: 14mm;
+      }
+
+      .variant {
+        display: flex;
+        flex-direction: column;
+        gap: 4mm;
+      }
+      .variant-label {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 10pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #333;
+      }
+      .variant-label .accent {
+        color: var(--accent);
+      }
+      .variant-label .desc {
+        margin-left: 1.4em;
+        letter-spacing: 0.04em;
+        text-transform: none;
+        color: #666;
+        font-size: 9pt;
+      }
+      .pair {
+        display: flex;
+        gap: 6mm;
+        flex-wrap: wrap;
+      }
+
+      .card {
+        width: var(--w);
+        height: var(--h);
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        font-size: 7pt;
+        line-height: 1.5;
+        color: var(--ink);
+        box-shadow: 0 1mm 4mm rgba(0,0,0,0.08);
+      }
+
+      .frame {
+        position: absolute;
+        inset: var(--safe-y) var(--safe-x);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .accent { color: var(--accent); }
+      .ink-mid { color: var(--ink-mid); }
+      .ink-faint { color: var(--ink-faint); }
+
+      hr.rule {
+        border: 0;
+        height: 0.3pt;
+        background: var(--rule-strong);
+        margin: 0;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .hero {
+        margin-top: 8mm;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6mm;
+      }
+      .statement {
+        margin-top: auto;
+        margin-bottom: 2.2mm;
+        line-height: 1.4;
+      }
+      .statement .sep {
+        color: var(--ink-faint);
+        display: inline-block;
+        width: 1.6em;
+        text-align: center;
+      }
+      .contact {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-top: 2.5mm;
+        border-top: 0.3pt solid var(--rule);
+      }
+
+      .body {
+        margin-top: 4mm;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tagline {
+        margin: 0;
+      }
+      .paraphrase {
+        margin-top: 2.5mm;
+      }
+      .wordmark {
+        margin-top: auto;
+      }
+      .foot {
+        margin-top: 1.6mm;
+        padding-top: 1.8mm;
+        border-top: 0.3pt solid var(--rule);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      /* ============================================================
+         VARIANT A — Mono primary  (JetBrains Mono + Plex Sans JP)
+         "Engineering native"
+         ============================================================ */
+      .va {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+      }
+      .va .label {
+        font-size: 6pt;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .va .name-latin {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-weight: 700;
+        font-size: 19pt;
+        letter-spacing: -0.01em;
+        line-height: 0.96;
+        display: block;
+      }
+      .va .name-jp {
+        display: block;
+        margin-top: 1.6mm;
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 10.5pt;
+        color: var(--ink-mid);
+        letter-spacing: 0.16em;
+      }
+      .va .statement {
+        font-size: 7pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-mid);
+      }
+      .va .contact .email,
+      .va .contact .url {
+        font-size: 6.5pt;
+        letter-spacing: 0.04em;
+      }
+      .va .contact .url { font-weight: 700; }
+      .va .contact .accent { font-size: 8pt; font-weight: 700; }
+      .va .tagline {
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1.12;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+      }
+      .va .tagline .accent-word {
+        color: var(--accent);
+      }
+      .va .paraphrase {
+        font-size: 8pt;
+        font-style: italic;
+        letter-spacing: 0.04em;
+        color: var(--ink-mid);
+      }
+      .va .wordmark {
+        font-weight: 700;
+        font-size: 19pt;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .va .wordmark .accent { color: var(--accent); }
+      .va .foot .url {
+        font-size: 6.5pt;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+      }
+
+      /* ============================================================
+         VARIANT B — Display Sans primary  (Hubot Sans + Plex Sans JP)
+         "Brand-forward"
+         ============================================================ */
+      .vb {
+        font-family:
+          "Hubot Sans", "IBM Plex Sans JP", "Hiragino Sans",
+          system-ui, sans-serif;
+      }
+      .vb .label {
+        font-size: 6pt;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .vb .name-latin {
+        font-weight: 800;
+        font-size: 26pt;
+        letter-spacing: -0.025em;
+        line-height: 0.96;
+        display: block;
+      }
+      .vb .name-jp {
+        display: block;
+        margin-top: 1.6mm;
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--ink-mid);
+        letter-spacing: 0.18em;
+      }
+      .vb .statement {
+        font-size: 6.5pt;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-mid);
+      }
+      .vb .contact .email,
+      .vb .contact .url {
+        font-size: 7pt;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        font-variant-numeric: tabular-nums;
+      }
+      .vb .contact .url { font-weight: 700; }
+      .vb .contact .accent { font-size: 9pt; font-weight: 800; }
+      .vb .tagline {
+        font-family:
+          "Hubot Sans", "IBM Plex Sans JP", "Hiragino Sans",
+          system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 17pt;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      .vb .tagline .jp-line {
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 700;
+      }
+      .vb .tagline .accent-word {
+        color: var(--accent);
+      }
+      .vb .paraphrase {
+        font-size: 8pt;
+        font-weight: 500;
+        font-style: italic;
+        letter-spacing: 0.02em;
+        color: var(--ink-mid);
+      }
+      .vb .wordmark {
+        font-weight: 800;
+        font-size: 22pt;
+        letter-spacing: -0.025em;
+        line-height: 1;
+      }
+      .vb .wordmark .accent { color: var(--accent); }
+      .vb .foot .url {
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+
+      /* ============================================================
+         VARIANT C — Plex single family  (IBM Plex Sans JP + Plex Mono)
+         "Integrated" — 1 family with 2 cuts. Mirrors the positioning
+         thesis: 越境統合 / 認知負荷削減 → 1 family.
+         ============================================================ */
+      .vc {
+        font-family:
+          "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+      }
+      .vc .label {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 6pt;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .vc .name-latin {
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 24pt;
+        letter-spacing: -0.015em;
+        line-height: 0.96;
+        display: block;
+      }
+      .vc .name-jp {
+        display: block;
+        margin-top: 1.6mm;
+        font-weight: 300;
+        font-size: 11pt;
+        color: var(--ink-mid);
+        letter-spacing: 0.2em;
+      }
+      .vc .statement {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 6.5pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-mid);
+      }
+      .vc .contact .email,
+      .vc .contact .url {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 6.5pt;
+        letter-spacing: 0.04em;
+      }
+      .vc .contact .url { font-weight: 600; }
+      .vc .contact .accent {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 8pt;
+        font-weight: 700;
+      }
+      .vc .tagline {
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+        color: var(--ink);
+      }
+      .vc .tagline .accent-word {
+        color: var(--accent);
+      }
+      .vc .paraphrase {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 7pt;
+        font-style: italic;
+        letter-spacing: 0.04em;
+        color: var(--ink-mid);
+      }
+      .vc .wordmark {
+        font-family: "IBM Plex Sans JP", "Hiragino Sans", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 22pt;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .vc .wordmark .accent { color: var(--accent); }
+      .vc .foot .url {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 6.5pt;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="stage">
+
+      <!-- ============================================================
+           VARIANT A
+           ============================================================ -->
+      <section class="variant">
+        <div class="variant-label">
+          <span class="accent">§</span> VAR-A
+          <span class="desc">JetBrains Mono + IBM Plex Sans JP — engineering-native, 2 families</span>
+        </div>
+        <div class="pair">
+          <article class="card va">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="hero">
+                <div class="names">
+                  <span class="name-latin">ABE SHINJI</span>
+                  <span class="name-jp">安部&nbsp;&nbsp;新司</span>
+                </div>
+              </div>
+              <p class="statement">
+                OSINT<span class="sep">·</span>MACHINE&nbsp;LEARNING<span class="sep">·</span>INFORMATION&nbsp;THEORY
+              </p>
+              <div class="contact">
+                <span class="email">4beshinji@gmail.com</span>
+                <span class="accent">§</span>
+              </div>
+            </div>
+          </article>
+          <article class="card va">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="body">
+                <h2 class="tagline">
+                  もつれた課題を、<br />
+                  <span class="accent-word">解きほぐす。</span>
+                </h2>
+                <p class="paraphrase">// untangle what is tangled</p>
+              </div>
+              <div class="wordmark">TangleTeck<span class="accent">.</span></div>
+              <div class="foot">
+                <span class="url">tangle-tech.com</span>
+                <span class="accent" style="font-weight:700">§</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           VARIANT B
+           ============================================================ -->
+      <section class="variant">
+        <div class="variant-label">
+          <span class="accent">§</span> VAR-B
+          <span class="desc">Hubot Sans + IBM Plex Sans JP — brand-forward, 2 families (no mono, no serif)</span>
+        </div>
+        <div class="pair">
+          <article class="card vb">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="hero">
+                <div class="names">
+                  <span class="name-latin">ABE SHINJI</span>
+                  <span class="name-jp">安部&nbsp;&nbsp;新司</span>
+                </div>
+              </div>
+              <p class="statement">
+                OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep">·</span>Information&nbsp;Theory
+              </p>
+              <div class="contact">
+                <span class="email">4beshinji@gmail.com</span>
+                <span class="accent">§</span>
+              </div>
+            </div>
+          </article>
+          <article class="card vb">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="body">
+                <h2 class="tagline">
+                  <span class="jp-line">もつれた課題を、</span><br />
+                  <span class="jp-line accent-word">解きほぐす。</span>
+                </h2>
+                <p class="paraphrase">// untangle what is tangled</p>
+              </div>
+              <div class="wordmark">TangleTeck<span class="accent">.</span></div>
+              <div class="foot">
+                <span class="url">tangle-tech.com</span>
+                <span class="accent" style="font-weight:800">§</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           VARIANT C
+           ============================================================ -->
+      <section class="variant">
+        <div class="variant-label">
+          <span class="accent">§</span> VAR-C
+          <span class="desc">IBM Plex Sans JP + Plex Mono — single family, 2 cuts. 越境統合 = 1 family</span>
+        </div>
+        <div class="pair">
+          <article class="card vc">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="hero">
+                <div class="names">
+                  <span class="name-latin">ABE SHINJI</span>
+                  <span class="name-jp">安部&nbsp;&nbsp;新司</span>
+                </div>
+              </div>
+              <p class="statement">
+                OSINT<span class="sep">·</span>MACHINE&nbsp;LEARNING<span class="sep">·</span>INFORMATION&nbsp;THEORY
+              </p>
+              <div class="contact">
+                <span class="email">4beshinji@gmail.com</span>
+                <span class="accent">§</span>
+              </div>
+            </div>
+          </article>
+          <article class="card vc">
+            <div class="frame">
+              <div class="meta">
+                <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+              </div>
+              <hr class="rule" style="margin-top: 1.6mm" />
+              <div class="body">
+                <h2 class="tagline">
+                  もつれた課題を、<br />
+                  <span class="accent-word">解きほぐす。</span>
+                </h2>
+                <p class="paraphrase">Untangle what is tangled.</p>
+              </div>
+              <div class="wordmark">TangleTeck<span class="accent">.</span></div>
+              <div class="foot">
+                <span class="url">tangle-tech.com</span>
+                <span class="accent" style="font-weight:700">§</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </body>
+</html>

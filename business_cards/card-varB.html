@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>Abe Shinji — Tangleteck</title>
+    <title>Abe Shinji — Tangleteck (VAR-B)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -48,6 +48,13 @@
         font-feature-settings: "palt" on;
       }
 
+      .stage {
+        padding: 14mm;
+        display: flex;
+        gap: 8mm;
+        flex-wrap: wrap;
+      }
+
       .card {
         width: var(--w);
         height: var(--h);
@@ -58,6 +65,7 @@
         font-size: 7pt;
         line-height: 1.5;
         color: var(--ink);
+        box-shadow: 0 1mm 4mm rgba(0,0,0,0.08);
       }
       .card:last-child { page-break-after: auto; }
 
@@ -85,33 +93,6 @@
         font-weight: 600;
         letter-spacing: 0.28em;
         text-transform: uppercase;
-      }
-
-      /* Shared bottom strip — pins both front and back rules to the same y. */
-      .contact, .foot {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-top: 1.6mm;
-        padding-top: 2.2mm;
-        border-top: 0.3pt solid var(--rule);
-        line-height: 1;
-      }
-      .contact .email,
-      .contact .url,
-      .foot .email,
-      .foot .url {
-        font-family: var(--display);
-        font-size: 7pt;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        font-variant-numeric: tabular-nums;
-      }
-      .contact .accent,
-      .foot .accent {
-        font-family: var(--display);
-        font-size: 9pt;
-        font-weight: 800;
       }
 
       /* ============== FRONT ============== */
@@ -160,6 +141,32 @@
         display: inline-block;
         width: 1.6em;
         text-align: center;
+      }
+      /* Shared bottom strip — pins both front and back rules to the same y. */
+      .contact, .foot {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-top: 1.6mm;
+        padding-top: 2.2mm;
+        border-top: 0.3pt solid var(--rule);
+        line-height: 1;
+      }
+      .contact .email,
+      .contact .url,
+      .foot .email,
+      .foot .url {
+        font-family: var(--display);
+        font-size: 7pt;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        font-variant-numeric: tabular-nums;
+      }
+      .contact .accent,
+      .foot .accent {
+        font-family: var(--display);
+        font-size: 9pt;
+        font-weight: 800;
       }
 
       /* ============== BACK ============== */
@@ -213,47 +220,49 @@
   </head>
 
   <body>
-    <article class="card front">
-      <div class="frame">
-        <div class="meta">
-          <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
-        </div>
-        <hr class="rule" style="margin-top: 1.6mm" />
-        <div class="hero">
-          <div class="names">
-            <span class="latin">ABE SHINJI</span>
-            <span class="jp">安部&nbsp;&nbsp;新司</span>
+    <div class="stage">
+      <article class="card front">
+        <div class="frame">
+          <div class="meta">
+            <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
+          </div>
+          <hr class="rule" style="margin-top: 1.6mm" />
+          <div class="hero">
+            <div class="names">
+              <span class="latin">ABE SHINJI</span>
+              <span class="jp">安部&nbsp;&nbsp;新司</span>
+            </div>
+          </div>
+          <p class="statement">
+            OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep">·</span>Information&nbsp;Theory
+          </p>
+          <div class="contact">
+            <span class="email">4beshinji@gmail.com</span>
+            <span class="accent">§</span>
           </div>
         </div>
-        <p class="statement">
-          OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep">·</span>Information&nbsp;Theory
-        </p>
-        <div class="contact">
-          <span class="email">4beshinji@gmail.com</span>
-          <span class="accent">§</span>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <article class="card back">
-      <div class="frame">
-        <div class="meta">
-          <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+      <article class="card back">
+        <div class="frame">
+          <div class="meta">
+            <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+          </div>
+          <hr class="rule" style="margin-top: 1.6mm" />
+          <div class="body">
+            <h2 class="tagline">
+              もつれた課題を、<br />
+              <span class="accent-word">解きほぐす。</span>
+            </h2>
+            <p class="paraphrase"><span class="slash">// </span>untangle what is tangled</p>
+          </div>
+          <div class="wordmark">TangleTeck<span class="accent">.</span></div>
+          <div class="foot">
+            <span class="url">tangle-tech.com</span>
+            <span class="accent">§</span>
+          </div>
         </div>
-        <hr class="rule" style="margin-top: 1.6mm" />
-        <div class="body">
-          <h2 class="tagline">
-            もつれた課題を、<br />
-            <span class="accent-word">解きほぐす。</span>
-          </h2>
-          <p class="paraphrase"><span class="slash">// </span>untangle what is tangled</p>
-        </div>
-        <div class="wordmark">TangleTeck<span class="accent">.</span></div>
-        <div class="foot">
-          <span class="url">tangle-tech.com</span>
-          <span class="accent">§</span>
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </body>
 </html>
