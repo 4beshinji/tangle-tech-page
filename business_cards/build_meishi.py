@@ -194,10 +194,12 @@ def back_yoko() -> str:
                  tracking_em=0.01),
     ]))
 
-    # Tagline line 2 — 解きほぐす。 (red accent)
+    # Tagline line 2 — 解きほぐす。 (red, italic — synthetic skew on JP glyphs
+    # since Hiragino has no italic cut. Reads as motion/resolution against the
+    # upright problem-statement above.)
     shapes.append(text_box(121, "tagline-l2", SAFE_L, 23.5, SAFE_W, 7, [
         text_run("解きほぐす。", 17, ACCENT, latin=LATIN, ea=JP, bold=True,
-                 tracking_em=0.01),
+                 italic=True, tracking_em=0.01),
     ]))
 
     # Paraphrase — // untangle what is tangled (italic).
