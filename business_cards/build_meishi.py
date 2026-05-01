@@ -199,7 +199,7 @@ def back_yoko() -> str:
     # upright problem-statement above.)
     shapes.append(text_box(121, "tagline-l2", SAFE_L, 23.5, SAFE_W, 7, [
         text_run("解きほぐす。", 17, ACCENT, latin=LATIN, ea=JP, bold=True,
-                 italic=True, tracking_em=0.01),
+                 italic=True, tracking_em=-0.03),
     ]))
 
     # Paraphrase — // untangle what is tangled (italic).
