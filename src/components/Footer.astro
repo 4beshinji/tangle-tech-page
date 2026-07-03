@@ -1,5 +1,7 @@
 ---
+import { NAV_ITEMS } from "@/data/navigation";
 import { COMPANY } from "../config";
+
 const year = new Date().getFullYear();
 const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
 ---
@@ -15,7 +17,7 @@ const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
       >
         {COMPANY.tagline}
       </p>
-      <p class="mt-4 max-w-md text-sm text-(--color-ink-mid) leading-[1.85]">
+      <p class="mt-4 max-w-md text-sm leading-[1.85] text-(--color-ink-mid)">
         {COMPANY.mission}
       </p>
     </div>
@@ -24,10 +26,15 @@ const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
       <p class="mono text-(--color-ink-faint)">Sitemap</p>
       <ul class="mt-4 space-y-2 text-sm">
         <li><a href="/" class="accent-link">Index</a></li>
-        <li><a href="/#practice" class="accent-link">Practice</a></li>
-        <li><a href="/#works" class="accent-link">Works</a></li>
-        <li><a href="/#about" class="accent-link">About</a></li>
-        <li><a href="/#contact" class="accent-link">Contact</a></li>
+        {
+          NAV_ITEMS.map(item => (
+            <li>
+              <a href={item.href} class="accent-link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
@@ -35,14 +42,21 @@ const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
       <p class="mono text-(--color-ink-faint)">Contact</p>
       <ul class="mt-4 space-y-2 text-sm">
         <li>
-          <a
-            href={`mailto:${COMPANY.email}`}
-            class="accent-link"
-          >
+          <a href={`mailto:${COMPANY.email}`} class="accent-link">
             {COMPANY.email}
           </a>
         </li>
         <li class="text-(--color-ink-mid)">{COMPANY.domain}</li>
+        <li>
+          <a
+            href="https://slingstonelog.pages.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="accent-link"
+          >
+            Engineering Log ↗
+          </a>
+        </li>
       </ul>
     </div>
   </div>

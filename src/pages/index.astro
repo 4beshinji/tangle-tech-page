@@ -1,5 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+import DisciplineLattice from "../components/DisciplineLattice.astro";
 import { SERVICES } from "../data/services";
 import { COMPANY } from "../config";
 
@@ -13,13 +16,12 @@ const allDisciplines = Array.from(
   <!-- ============================================================
        § 00  HERO
        ============================================================ -->
-  <section
-    class="relative mx-auto max-w-(--container-page) px-6 pt-16 pb-24 lg:px-10 lg:pt-28 lg:pb-36"
-  >
+  <Container class="pt-16 pb-24 lg:pt-28 lg:pb-36">
     <div class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-7">
         <p class="mono lift fade text-(--color-ink-mid)">
-          <span class="text-(--color-accent)">§ 00</span>  ─  Tangle Tech ─ Autonomous Systems Studio ─ EST. 2025
+          <span class="text-(--color-accent)">§ 00</span> ─ Tangle Tech ─ Autonomous
+          Systems Studio ─ EST. 2025
         </p>
 
         <h1
@@ -28,11 +30,11 @@ const allDisciplines = Array.from(
           <span class="lift block delay-1">異分野を、</span>
           <span class="lift block delay-2">
             <span class="serif-italic font-normal text-(--color-accent)">
-            束ねて
+              束ねて
             </span>
             編む。
           </span>
-          <span class="lift block delay-3 text-(--color-ink-mid)">
+          <span class="lift block text-(--color-ink-mid) delay-3">
             Cross-domain<span class="text-(--color-accent)">,</span>
             <span class="serif-italic">autonomous.</span>
           </span>
@@ -40,13 +42,11 @@ const allDisciplines = Array.from(
       </div>
 
       <div class="lg:col-span-5 lg:pt-12">
-        <div class="lift fade delay-4 max-w-md lg:ml-auto">
+        <div class="lift fade max-w-md delay-4 lg:ml-auto">
           <p class="mono text-(--color-ink-faint)">— Statement</p>
-          <p class="mt-4 text-base text-(--color-ink) leading-[1.95]">
+          <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
             一つの問題を解くのに、本来であれば
-            <em class="serif-italic text-(--color-accent) not-italic-wrap">
-              N 人の専門家
-            </em>
+            <em class="serif-italic text-(--color-accent)"> N 人の専門家 </em>
             が必要だった。
             <br />
             だから、協業と越境に必要なコストが高すぎて、現場はいつも「部分最適」で妥協してきた。
@@ -55,21 +55,21 @@ const allDisciplines = Array.from(
             <br />
             どれだけ開発が早くなっても、グランドデザインを描くには、
             <br />
-            <em class="serif-italic text-(--color-accent) not-italic-wrap">
-            知識を統合する必要があるからだ。
+            <em class="serif-italic text-(--color-accent)">
+              知識を統合する必要があるからだ。
             </em>
             <br />
             TangleTechは、あらゆる分野を束ねて、
             <br />
             もつれた課題をときほぐします。
           </p>
-          <p class="mt-6 text-sm text-(--color-ink-mid) leading-[1.95]">
+          <p class="mt-6 text-sm leading-[1.95] text-(--color-ink-mid)">
             センサ・アクチュエータ・公開情報・最新論文・業務資料・現場知……
             <br />
             必要なものはすべて統合する。
-          <br />
+            <br />
             畑ではビニールハウス解体から植物生理学、青果市場まで。オフィスではゴミ捨てから機械学習モデルを用いた人流監視まで。現場の問題に正面から。
-          <br />
+            <br />
             ── それが Tangle Tech のやり方です。
           </p>
         </div>
@@ -78,89 +78,76 @@ const allDisciplines = Array.from(
 
     <!-- Company-level discipline lattice -->
     <div
-      class="lift fade delay-5 mt-20 border-t border-(--color-rule) pt-6 lg:mt-32"
+      class="lift fade mt-20 border-t border-(--color-rule) pt-6 delay-5 lg:mt-32"
     >
       <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-10">
         <span class="mono shrink-0 text-(--color-ink-faint)">
           Disciplines we weave
         </span>
-        <div class="lattice text-(--color-ink-mid)">
-          {allDisciplines.map(d => <span>{d}</span>)}
-        </div>
+        <DisciplineLattice codes={allDisciplines} />
       </div>
     </div>
-  </section>
+  </Container>
 
   <!-- ============================================================
        § 01  PRACTICE — manifesto
        ============================================================ -->
-  <section
-    id="practice"
-    class="scroll-mt-24 border-t border-(--color-rule-strong)"
+  <Section
+    index="01"
+    label="Practice"
+    bordered
+    class="scroll-mt-24"
+    containerClass="py-24 lg:py-36"
   >
-    <div
-      class="mx-auto max-w-(--container-page) px-6 py-24 lg:px-10 lg:py-36"
-    >
-      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
-        <div class="lg:col-span-3">
-          <p class="section-index">01 / Practice</p>
-        </div>
+    <h2 class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl">
+      <span class="serif-italic font-normal text-(--color-accent)">
+        N つの分野
+      </span>
+      を、 1 つのシステムに。
+    </h2>
 
-        <div class="lg:col-span-9">
-          <h2
-            class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl"
-          >
-            <span class="serif-italic font-normal text-(--color-accent)">
-              N つの分野
-            </span>
-            を、 1 つのシステムに。
-          </h2>
-
-          <div class="mt-16 divide-y divide-(--color-rule)">
-            {
-              [
-                {
-                  num: "i.",
-                  jp: "世界を知覚する",
-                  en: "Sense the field",
-                  body: "人の目から機械の目へ。人の判断をAIの判断に。非構造化データもシステムに統合して、必要なら空間情報も付与。複雑で曖昧なフィールドを複雑なまま理解する。",
-                },
-                {
-                  num: "ii.",
-                  jp: "知識と接続する",
-                  en: "Bridge to knowledge",
-                  body: "フィールドのデータを、市場・論文・社内ナレッジといった『分野横断の情報』と接続。専門家チームが分析するように、あなたの眼の前を分析。",
-                },
-                {
-                  num: "iii.",
-                  jp: "収集、判断、介入、提案。",
-                  en: "Collect, judge, act, propose",
-                  body: "情報を収集する。LLMから専用機械学習モデル、ただのif文まで、課題の要求に合わせて。自動化し、人間と協業する。リスクとコストの現実的なバランス。",
-                },
-              ].map(t => (
-                <div class="grid gap-4 py-10 lg:grid-cols-12 lg:gap-6">
-                  <div class="lg:col-span-2">
-                    <span class="serif-italic text-3xl text-(--color-accent)">
-                      {t.num}
-                    </span>
-                  </div>
-                  <div class="lg:col-span-4">
-                    <p class="display text-2xl text-(--color-ink) lg:text-3xl">
-                      {t.jp}
-                    </p>
-                    <p class="mono mt-2 text-(--color-ink-faint)">{t.en}</p>
-                  </div>
-                  <p class="text-base text-(--color-ink-mid) leading-[1.95] lg:col-span-6">
-                    {t.body}
-                  </p>
-                </div>
-              ))
-            }
+    <div class="mt-16 divide-y divide-(--color-rule)">
+      {
+        [
+          {
+            num: "i.",
+            jp: "世界を知覚する",
+            en: "Sense the field",
+            body: "人の目から機械の目へ。人の判断をAIの判断に。非構造化データもシステムに統合して、必要なら空間情報も付与。複雑で曖昧なフィールドを複雑なまま理解する。",
+          },
+          {
+            num: "ii.",
+            jp: "知識と接続する",
+            en: "Bridge to knowledge",
+            body: "フィールドのデータを、市場・論文・社内ナレッジといった『分野横断の情報』と接続。専門家チームが分析するように、あなたの眼の前を分析。",
+          },
+          {
+            num: "iii.",
+            jp: "収集、判断、介入、提案。",
+            en: "Collect, judge, act, propose",
+            body: "情報を収集する。LLMから専用機械学習モデル、ただのif文まで、課題の要求に合わせて。自動化し、人間と協業する。リスクとコストの現実的なバランス。",
+          },
+        ].map(t => (
+          <div class="grid gap-4 py-10 lg:grid-cols-12 lg:gap-6">
+            <div class="lg:col-span-2">
+              <span class="serif-italic text-3xl text-(--color-accent)">
+                {t.num}
+              </span>
+            </div>
+            <div class="lg:col-span-4">
+              <p class="display text-2xl text-(--color-ink) lg:text-3xl">
+                {t.jp}
+              </p>
+              <p class="mono mt-2 text-(--color-ink-faint)">{t.en}</p>
+            </div>
+            <p class="text-base leading-[1.95] text-(--color-ink-mid) lg:col-span-6">
+              {t.body}
+            </p>
           </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
-  </section>
+  </Section>
 
   <!-- ============================================================
        § 02  WORKS — services list
@@ -169,9 +156,7 @@ const allDisciplines = Array.from(
     id="works"
     class="scroll-mt-24 border-t border-(--color-rule-strong)"
   >
-    <div
-      class="mx-auto max-w-(--container-page) px-6 pt-24 lg:px-10 lg:pt-32"
-    >
+    <Container class="pt-24 lg:pt-32">
       <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
         <div class="lg:col-span-3">
           <p class="section-index">02 / Works</p>
@@ -182,14 +167,12 @@ const allDisciplines = Array.from(
           >
             あらゆるドメインから、最適化。
           </h2>
-          <p
-            class="mt-6 max-w-2xl text-(--color-ink-mid) leading-[1.95]"
-          >
+          <p class="mt-6 max-w-2xl leading-[1.95] text-(--color-ink-mid)">
             家庭、農場、オフィス、企業全体。あらゆる場所に思いもよらない価値を。
           </p>
         </div>
       </div>
-    </div>
+    </Container>
 
     <ol class="mx-auto mt-20 max-w-(--container-page) lg:mt-28">
       <li class="border-t border-(--color-rule-strong)"></li>
@@ -208,9 +191,7 @@ const allDisciplines = Array.from(
               </div>
 
               <div class="mt-3 lg:col-span-7 lg:mt-0">
-                <p class="mono text-(--color-ink-faint)">
-                  {service.category}
-                </p>
+                <p class="mono text-(--color-ink-faint)">{service.category}</p>
                 <h3 class="display service-row__title mt-2 text-3xl text-(--color-ink) sm:text-4xl lg:text-5xl">
                   {service.name}
                 </h3>
@@ -243,104 +224,86 @@ const allDisciplines = Array.from(
   <!-- ============================================================
        § 03  ABOUT
        ============================================================ -->
-  <section
-    id="about"
-    class="scroll-mt-24 border-t border-(--color-rule-strong)"
+  <Section
+    index="03"
+    label="About"
+    bordered
+    class="scroll-mt-24"
+    containerClass="py-24 lg:py-36"
   >
-    <div
-      class="mx-auto max-w-(--container-page) px-6 py-24 lg:px-10 lg:py-36"
+    <p
+      class="serif-italic text-3xl leading-[1.45] text-(--color-ink) sm:text-5xl lg:text-[3.6rem]"
     >
-      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
-        <div class="lg:col-span-3">
-          <p class="section-index">03 / About</p>
-        </div>
+      “ 1つのシステムに、
+      <span class="text-(--color-accent)">8つの専門分野</span>
+      が必要なら、その8つを統合する。”
+    </p>
 
-        <div class="lg:col-span-9">
-          <p
-            class="serif-italic text-3xl leading-[1.45] text-(--color-ink) sm:text-5xl lg:text-[3.6rem]"
-          >
-            “ 1つのシステムに、
-            <span class="text-(--color-accent)">8つの専門分野</span>
-            が必要なら、その8つを統合する。”
-          </p>
-
-          <div class="mt-16 grid gap-12 lg:grid-cols-2">
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Origin</p>
-              <p class="mt-4 text-base text-(--color-ink) leading-[1.95]">
-                Tangle Tech は要求される知見が多分野に跨がり、「人月の神話」に従い各種コスト的制約によって不可能だったシステムを高速で実現します。
-              </p>
-            </div>
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Architecture</p>
-              <p class="mt-4 text-base text-(--color-ink) leading-[1.95]">
-                IoTからLLM、匿名化まで。必要なものすべてを、最低限。本当にそれが必要？と常にイシューに立ち返ります。
-              </p>
-            </div>
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Sovereignty</p>
-              <p class="mt-4 text-base text-(--color-ink) leading-[1.95]">
-                データ主権を最優先。ローカル LLMと自前のエッジ計算で完結し、クラウドAIの不安定な品質に依存しません。
-              </p>
-            </div>
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Operating Principle</p>
-              <p class="mt-4 text-base text-(--color-ink) leading-[1.95]">
-                現実的な自動化。現実的な自律AI。従来的な制御とLLMの協働。if文、PID制御、機械学習モデル、LLM……課題に最適な手法で自律、監視、介入、提案を。
-              </p>
-            </div>
-          </div>
-        </div>
+    <div class="mt-16 grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Origin</p>
+        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
+          Tangle Tech
+          は要求される知見が多分野に跨がり、「人月の神話」に従い各種コスト的制約によって不可能だったシステムを高速で実現します。
+        </p>
+      </div>
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Architecture</p>
+        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
+          IoTからLLM、匿名化まで。必要なものすべてを、最低限。本当にそれが必要？と常にイシューに立ち返ります。
+        </p>
+      </div>
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Sovereignty</p>
+        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
+          データ主権を最優先。ローカル
+          LLMと自前のエッジ計算で完結し、クラウドAIの不安定な品質に依存しません。
+        </p>
+      </div>
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Operating Principle</p>
+        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
+          現実的な自動化。現実的な自律AI。従来的な制御とLLMの協働。if文、PID制御、機械学習モデル、LLM……課題に最適な手法で自律、監視、介入、提案を。
+        </p>
       </div>
     </div>
-  </section>
+  </Section>
 
   <!-- ============================================================
        § 04  CONTACT
        ============================================================ -->
-  <section
-    id="contact"
-    class="scroll-mt-24 border-t border-(--color-rule-strong)"
+  <Section
+    index="04"
+    label="Contact"
+    bordered
+    class="scroll-mt-24"
+    containerClass="py-24 lg:py-36"
   >
+    <h2 class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-7xl">
+      ドラスティックな
+      <br />
+      最適化を求める人へ。
+    </h2>
+
     <div
-      class="mx-auto max-w-(--container-page) px-6 py-24 lg:px-10 lg:py-36"
+      class="mt-16 grid gap-12 border-t border-(--color-rule) pt-12 lg:grid-cols-2"
     >
-      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
-        <div class="lg:col-span-3">
-          <p class="section-index">04 / Contact</p>
-        </div>
-
-        <div class="lg:col-span-9">
-          <h2
-            class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-7xl"
-          >
-            ドラスティックな
-            <br />
-            最適化を求める人へ。
-          </h2>
-
-          <div
-            class="mt-16 grid gap-12 border-t border-(--color-rule) pt-12 lg:grid-cols-2"
-          >
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Inquiries</p>
-              <p class="mt-3 text-(--color-ink-mid) leading-[1.9]">
-                導入相談・実証実験・受託開発・登壇・取材依頼など、お気軽にご連絡ください。
-              </p>
-            </div>
-            <div>
-              <p class="mono text-(--color-ink-faint)">— Email</p>
-              <a
-                href={`mailto:${COMPANY.email}`}
-                class="display mt-3 inline-block text-2xl text-(--color-ink) sm:text-4xl lg:text-5xl"
-              >
-                <span class="accent-link">{COMPANY.email}</span>
-                <span class="caret"></span>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Inquiries</p>
+        <p class="mt-3 leading-[1.9] text-(--color-ink-mid)">
+          導入相談・実証実験・受託開発・登壇・取材依頼など、お気軽にご連絡ください。
+        </p>
+      </div>
+      <div>
+        <p class="mono text-(--color-ink-faint)">— Email</p>
+        <a
+          href={`mailto:${COMPANY.email}`}
+          class="display mt-3 inline-block text-2xl text-(--color-ink) sm:text-4xl lg:text-5xl"
+        >
+          <span class="accent-link">{COMPANY.email}</span>
+          <span class="caret"></span>
+        </a>
       </div>
     </div>
-  </section>
+  </Section>
 </Base>

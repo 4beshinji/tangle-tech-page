@@ -22,15 +22,15 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 
 ## 技術スタック
 
-| 役割 | 採用 |
-|---|---|
-| フレームワーク | Astro 5 (`output: "static"`、SSR なし) |
-| 型 | TypeScript strict |
-| CSS | Tailwind 4 (`@theme` ベースの CSS-first) |
-| パッケージマネージャ | pnpm 10.11.1 |
-| ランタイム | Node.js 22+ |
-| ホスト | Cloudflare Workers Static Assets (`wrangler.jsonc`) |
-| ドメイン | tangle-tech.com (お名前.com 取得) |
+| 役割                 | 採用                                                |
+| -------------------- | --------------------------------------------------- |
+| フレームワーク       | Astro 5 (`output: "static"`、SSR なし)              |
+| 型                   | TypeScript strict                                   |
+| CSS                  | Tailwind 4 (`@theme` ベースの CSS-first)            |
+| パッケージマネージャ | pnpm 10.11.1                                        |
+| ランタイム           | Node.js 22+                                         |
+| ホスト               | Cloudflare Workers Static Assets (`wrangler.jsonc`) |
+| ドメイン             | tangle-tech.com (お名前.com 取得)                   |
 
 ---
 
@@ -43,30 +43,32 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 
 ### タイポグラフィ
 
-| 用途 | フォント | クラス |
-|---|---|---|
-| 見出し (display) | Hubot Sans Variable / wght 800-900 | `.display` |
-| 本文 (JP/EN) | IBM Plex Sans JP | デフォルト body |
-| Mono ラベル / 索引 | JetBrains Mono | `.mono` `.mono-sm` |
-| Editorial italic | Instrument Serif Italic | `.serif-italic` (1ページ1〜2回まで) |
+| 用途               | フォント                           | クラス                              |
+| ------------------ | ---------------------------------- | ----------------------------------- |
+| 見出し (display)   | Hubot Sans Variable / wght 800-900 | `.display`                          |
+| 本文 (JP/EN)       | IBM Plex Sans JP                   | デフォルト body                     |
+| Mono ラベル / 索引 | JetBrains Mono                     | `.mono` `.mono-sm`                  |
+| Editorial italic   | Instrument Serif Italic            | `.serif-italic` (1ページ1〜2回まで) |
 
 `.display` には `text-wrap: balance` が効いており、大見出しは自動で均等な行幅に折れます。手で `<br>` を入れる前にこの挙動を確認してください。
 
 ### 色 (単一アクセント方式)
 
 ```
---color-paper:     #f5f3ee   warm off-white (paper ground)
---color-ink:       #0e0e0c   text + dark band ground
---color-ink-mid:   #5a5852   muted text
---color-ink-faint: #a3a098   labels, faint marks
---color-rule:      ink @ 18% hairlines
---color-accent:    #ff3b1c   electric vermillion
+--color-paper:     #2a2622   dark warm ground
+--color-ink:       #ede9dd   warm off-white (text + light band ground)
+--color-ink-mid:   #a09c91   muted text
+--color-ink-faint: #615d56   labels, faint marks
+--color-rule:      ink @ 16% hairlines
+--color-rule-strong: ink @ 40% stronger hairlines
+--color-accent:    #ff6a48   electric vermillion
 ```
 
 **運用ルール:**
+
 - グラデ禁止、面塗り (アクセント色) 禁止
 - アクセントは 1 ページ最大 5 回まで (下線・ホバー・カレント・§・1 単語強調)
-- ダークモードは `prefers-color-scheme: dark` で自動切替
+- 現在はダークテーマをデフォルトとし、`prefers-color-scheme` による自動切替は未対応
 
 ### 構造シグネチャ — Discipline Lattice
 
@@ -102,16 +104,16 @@ Astro 5 + Tailwind 4 の静的サイトを **Cloudflare Workers (Static Assets)*
 
 ### 場所
 
-| 場所 | 中身 |
-|---|---|
-| `src/config.ts` | 会社名・タグライン・mission・連絡先 |
-| `src/data/services.ts` | **6 サービスの全文言** (name / tagline / pitch / disciplines / highlights / stack / useCases / statusLabel / media) |
-| `src/pages/index.astro` | トップ静的文言 — ヒーロー / Practice (3 信条 inline 配列) / Works イントロ / About / Contact |
-| `src/pages/services/[slug].astro` | 詳細ページの共通ラベル (A/B/C... 索引、CTA) |
-| `src/pages/gallery/[slug].astro` | ギャラリー専用ページ (動的、`gallery.length > 4` のサービスのみ生成) |
-| `src/components/Header.astro` | グローバルナビ (`Practice` / `Works` / `About` / `Contact` + 索引 `01-04`) |
-| `src/components/Footer.astro` | フッター・build スタンプ |
-| `src/styles/global.css` | 配色トークン・フォント・ユーティリティクラス |
+| 場所                              | 中身                                                                                                                |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `src/config.ts`                   | 会社名・タグライン・mission・連絡先                                                                                 |
+| `src/data/services.ts`            | **6 サービスの全文言** (name / tagline / pitch / disciplines / highlights / stack / useCases / statusLabel / media) |
+| `src/pages/index.astro`           | トップ静的文言 — ヒーロー / Practice (3 信条 inline 配列) / Works イントロ / About / Contact                        |
+| `src/pages/services/[slug].astro` | 詳細ページの共通ラベル (A/B/C... 索引、CTA)                                                                         |
+| `src/pages/gallery/[slug].astro`  | ギャラリー専用ページ (動的、`gallery.length > 4` のサービスのみ生成)                                                |
+| `src/components/Header.astro`     | グローバルナビ (`Practice` / `Works` / `About` / `Contact` + 索引 `01-04`)                                          |
+| `src/components/Footer.astro`     | フッター・build スタンプ                                                                                            |
+| `src/styles/global.css`           | 配色トークン・フォント・ユーティリティクラス                                                                        |
 
 ### 改行制御 (日本語向け)
 
@@ -195,6 +197,7 @@ gallery: [
 ### 25 MB / asset 制限について
 
 Cloudflare Workers Static Assets は **1 ファイル 25 MB 上限**。
+
 - 現状 auto-aqua 動画 8.8 MB → 余裕
 - 総量が 50 MB を超えてきたら R2 / Cloudflare Stream へ動画だけ移行検討
 

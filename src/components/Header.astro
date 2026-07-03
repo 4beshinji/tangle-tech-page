@@ -1,10 +1,5 @@
 ---
-const navItems = [
-  { href: "/#practice", index: "01", label: "Practice" },
-  { href: "/#works", index: "02", label: "Works" },
-  { href: "/#about", index: "03", label: "About" },
-  { href: "/#contact", index: "04", label: "Contact" },
-];
+import { NAV_ITEMS } from "@/data/navigation";
 ---
 
 <header
@@ -30,7 +25,7 @@ const navItems = [
 
     <nav class="flex items-center gap-6 sm:gap-9">
       {
-        navItems.map(item => (
+        NAV_ITEMS.map(item => (
           <a
             href={item.href}
             class="mono group flex items-baseline gap-1.5 text-(--color-ink-mid) no-underline transition-colors hover:text-(--color-accent)"
@@ -42,6 +37,15 @@ const navItems = [
           </a>
         ))
       }
+      <a
+        href="https://slingstonelog.pages.dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mono hidden items-baseline gap-1.5 text-(--color-ink-faint) no-underline transition-colors hover:text-(--color-accent) sm:flex"
+      >
+        <span>Log</span>
+        <span aria-hidden="true">↗</span>
+      </a>
     </nav>
   </div>
 </header>

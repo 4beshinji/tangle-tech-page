@@ -1,0 +1,11 @@
+# 生成物・依存関係
+dist/
+node_modules/
+.pnpm/
+.astro/
+
+# ロックファイル
+pnpm-lock.yaml
+
+# 外部ツール出力や一時ファイル
+*.log

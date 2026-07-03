@@ -25,6 +25,24 @@ const pageTitle =
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const socialImage = new URL(ogImage ?? "/og.png", Astro.site).toString();
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.title,
+    url: SITE.website,
+    description: SITE.desc,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: COMPANY.name,
+    url: SITE.website,
+    email: COMPANY.email,
+    logo: new URL("/favicon.svg", Astro.site).toString(),
+  },
+];
 ---
 
 <!doctype html>
@@ -57,8 +75,14 @@ const socialImage = new URL(ogImage ?? "/og.png", Astro.site).toString();
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col">
     {
       sectionLabel && (
         <aside

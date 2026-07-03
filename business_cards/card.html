@@ -38,7 +38,8 @@
         margin: 0;
       }
 
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         background: #ddd;
@@ -59,7 +60,9 @@
         line-height: 1.5;
         color: var(--ink);
       }
-      .card:last-child { page-break-after: auto; }
+      .card:last-child {
+        page-break-after: auto;
+      }
 
       .frame {
         position: absolute;
@@ -68,9 +71,15 @@
         flex-direction: column;
       }
 
-      .accent { color: var(--accent); }
-      .ink-mid { color: var(--ink-mid); }
-      .ink-faint { color: var(--ink-faint); }
+      .accent {
+        color: var(--accent);
+      }
+      .ink-mid {
+        color: var(--ink-mid);
+      }
+      .ink-faint {
+        color: var(--ink-faint);
+      }
 
       hr.rule {
         border: 0;
@@ -88,7 +97,8 @@
       }
 
       /* Shared bottom strip — pins both front and back rules to the same y. */
-      .contact, .foot {
+      .contact,
+      .foot {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
@@ -194,7 +204,7 @@
         font-style: italic;
         font-weight: 400;
         font-size: 8.5pt;
-        letter-spacing: 0.10em;
+        letter-spacing: 0.1em;
         word-spacing: 0.14em;
         color: var(--ink-mid);
       }
@@ -210,7 +220,9 @@
         line-height: 1;
         color: var(--ink);
       }
-      .back .wordmark .accent { color: var(--accent); }
+      .back .wordmark .accent {
+        color: var(--accent);
+      }
     </style>
   </head>
 
@@ -218,7 +230,9 @@
     <article class="card front">
       <div class="frame">
         <div class="meta">
-          <span class="label ink-faint"><span class="accent">§</span> IDENTITY</span>
+          <span class="label ink-faint"
+            ><span class="accent">§</span> IDENTITY</span
+          >
         </div>
         <hr class="rule" style="margin-top: 1.6mm" />
         <div class="hero">
@@ -228,7 +242,9 @@
           </div>
         </div>
         <p class="statement">
-          OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep">·</span>Information&nbsp;Theory
+          OSINT<span class="sep">·</span>Machine&nbsp;Learning<span class="sep"
+            >·</span
+          >Information&nbsp;Theory
         </p>
         <div class="contact">
           <span class="email">4beshinji@gmail.com</span>
@@ -240,7 +256,9 @@
     <article class="card back">
       <div class="frame">
         <div class="meta">
-          <span class="label ink-faint"><span class="accent">§</span> MISSION</span>
+          <span class="label ink-faint"
+            ><span class="accent">§</span> MISSION</span
+          >
         </div>
         <hr class="rule" style="margin-top: 1.6mm" />
         <div class="body">
@@ -248,7 +266,9 @@
             もつれた課題を、<br />
             <span class="accent-word">解きほぐす。</span>
           </h2>
-          <p class="paraphrase"><span class="slash">// </span>untangle what is tangled</p>
+          <p class="paraphrase">
+            <span class="slash">// </span>untangle what is tangled
+          </p>
         </div>
         <div class="wordmark">TangleTeck<span class="accent">.</span></div>
         <div class="foot">

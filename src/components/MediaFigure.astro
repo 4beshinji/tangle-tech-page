@@ -1,0 +1,63 @@
+---
+import ImageOrImg from "./ImageOrImg.astro";
+import { isGalleryImageItem } from "@/data/services";
+import { isImageMetadata } from "@/data/services";
+import type { GalleryItem } from "@/data/services";
+
+interface Props {
+  item: GalleryItem;
+  plateNum?: string;
+  imageWidths?: number[];
+  imageSizes?: string;
+}
+
+const {
+  item,
+  plateNum,
+  imageWidths = [480, 720, 1080],
+  imageSizes = "(min-width: 1024px) 480px, 100vw",
+} = Astro.props;
+
+const isImage = isGalleryImageItem(item);
+const caption = item.caption ?? item.alt;
+---
+
+{
+  isImage ? (
+    <figure>
+      <ImageOrImg
+        src={item.src}
+        alt={item.alt}
+        class="w-full"
+        widths={imageWidths}
+        sizes={imageSizes}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
+        {plateNum && <span class="text-(--color-paper)/40">{plateNum}</span>}
+        <span>{caption}</span>
+      </figcaption>
+    </figure>
+  ) : (
+    <figure>
+      <video
+        src={item.src}
+        poster={isImageMetadata(item.poster) ? item.poster.src : item.poster}
+        muted={item.autoplay !== false}
+        autoplay={item.autoplay !== false}
+        loop={item.loop !== false}
+        controls={item.controls === true}
+        playsinline
+        preload="metadata"
+        aria-label={item.alt}
+        class="w-full"
+      />
+      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
+        {plateNum && <span class="text-(--color-paper)/40">{plateNum}</span>}
+        <span class="text-(--color-accent)">▶</span>
+        <span>{caption}</span>
+      </figcaption>
+    </figure>
+  )
+}

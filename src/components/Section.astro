@@ -1,0 +1,45 @@
+---
+import Container from "./Container.astro";
+
+interface Props {
+  index: string;
+  label: string;
+  class?: string;
+  containerClass?: string;
+  contentClass?: string;
+  bordered?: boolean;
+  ink?: boolean;
+}
+
+const {
+  index,
+  label,
+  class: className,
+  containerClass,
+  contentClass,
+  bordered = false,
+  ink = false,
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    bordered && "border-t border-(--color-rule-strong)",
+    ink && "bg-(--color-ink) text-(--color-paper)",
+    className,
+  ]}
+>
+  <Container class:list={["py-20 lg:py-28", containerClass]}>
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-span-3">
+        <p class:list={["section-index", ink && "text-(--color-paper)/60"]}>
+          {index} / {label}
+        </p>
+        <slot name="aside" />
+      </div>
+      <div class:list={["lg:col-span-9", contentClass]}>
+        <slot />
+      </div>
+    </div>
+  </Container>
+</section>

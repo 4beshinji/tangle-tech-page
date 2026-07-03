@@ -1,0 +1,17 @@
+---
+import { DISCIPLINE_LABELS, type DisciplineCode } from "@/data/disciplines";
+
+interface Props {
+  codes: DisciplineCode[];
+}
+
+const { codes } = Astro.props;
+---
+
+<div class="lattice">
+  {
+    codes.map(code => (
+      <span title={DISCIPLINE_LABELS[code] ?? code}>{code}</span>
+    ))
+  }
+</div>
