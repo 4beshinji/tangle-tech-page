@@ -3,29 +3,24 @@ import { NAV_ITEMS } from "@/data/navigation";
 import { COMPANY } from "../config";
 
 const year = new Date().getFullYear();
-const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
 ---
 
-<footer class="mt-32 border-t border-(--color-rule)">
+<footer class="border-t border-(--color-rule-strong) bg-(--color-paper-deep)">
   <div
-    class="mx-auto grid max-w-(--container-page) gap-12 px-6 py-16 lg:grid-cols-12 lg:gap-6 lg:px-10"
+    class="mx-auto grid max-w-(--container-page) gap-14 px-6 py-16 lg:grid-cols-12 lg:px-10 lg:py-20"
   >
-    <div class="lg:col-span-5">
-      <p class="mono text-(--color-ink-faint)">§ Index — Tangle Tech</p>
-      <p
-        class="display mt-4 text-3xl tracking-[-0.025em] text-(--color-ink) sm:text-4xl"
-      >
+    <div class="lg:col-span-6">
+      <p class="eyebrow">Tangle Tech</p>
+      <p class="display mt-6 max-w-xl text-3xl text-(--color-ink) sm:text-4xl">
         {COMPANY.tagline}
       </p>
-      <p class="mt-4 max-w-md text-sm leading-[1.85] text-(--color-ink-mid)">
+      <p class="mt-5 max-w-lg leading-[1.9] text-(--color-ink-mid)">
         {COMPANY.mission}
       </p>
     </div>
-
-    <div class="lg:col-span-3 lg:col-start-7">
-      <p class="mono text-(--color-ink-faint)">Sitemap</p>
-      <ul class="mt-4 space-y-2 text-sm">
-        <li><a href="/" class="accent-link">Index</a></li>
+    <div class="lg:col-span-2 lg:col-start-8">
+      <p class="mono text-(--color-ink-faint)">Navigate</p>
+      <ul class="mt-5 space-y-2.5 text-sm">
         {
           NAV_ITEMS.map(item => (
             <li>
@@ -37,14 +32,13 @@ const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
         }
       </ul>
     </div>
-
     <div class="lg:col-span-3">
       <p class="mono text-(--color-ink-faint)">Contact</p>
-      <ul class="mt-4 space-y-2 text-sm">
+      <ul class="mt-5 space-y-2.5 text-sm">
         <li>
-          <a href={`mailto:${COMPANY.email}`} class="accent-link">
-            {COMPANY.email}
-          </a>
+          <a href={`mailto:${COMPANY.email}`} class="accent-link"
+            >{COMPANY.email}</a
+          >
         </li>
         <li class="text-(--color-ink-mid)">{COMPANY.domain}</li>
         <li>
@@ -52,21 +46,18 @@ const buildStamp = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
             href="https://slingstonelog.pages.dev/"
             target="_blank"
             rel="noopener noreferrer"
-            class="accent-link"
+            class="accent-link">技術ログ ↗</a
           >
-            Engineering Log ↗
-          </a>
         </li>
       </ul>
     </div>
   </div>
-
   <div class="border-t border-(--color-rule)">
     <div
-      class="mono mx-auto flex max-w-(--container-page) flex-col gap-3 px-6 py-6 text-(--color-ink-faint) sm:flex-row sm:items-center sm:justify-between lg:px-10"
+      class="mono mx-auto flex max-w-(--container-page) flex-col gap-2 px-6 py-6 text-(--color-ink-faint) sm:flex-row sm:justify-between lg:px-10"
     >
-      <span>© {year} {COMPANY.name}. All rights reserved.</span>
-      <span>Build {buildStamp} ─ TT/v0.1</span>
+      <span>© {year} {COMPANY.name}</span>
+      <span>Maebashi / Japan — 36.3912° N</span>
     </div>
   </div>
 </footer>

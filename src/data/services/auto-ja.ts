@@ -11,43 +11,42 @@ import type { Service } from "./types";
 
 export const autoJa: Service = {
   slug: "auto-ja",
-  index: "002",
+  index: "001",
   name: "Auto JA",
   nameLatin: "Auto JA",
-  category: "Multi-domain Farm Platform",
-  tagline:
-    "市場予測とセンサ駆動の農場。最適な作物、最適な出荷タイミング。最大のリターン。",
+  category: "Core / Field Intelligence & Control",
+  tagline: "植物の生理から、温室と農場の次の状態を決める。",
   pitch:
-    "水耕栽培・養蜂・陸上養殖のドメインプラグインを差し替えて運用する統合農場プラットフォーム。市場価格データを用いた予測エンジンを内蔵し、最適な収穫タイミング提案から環境介入まで。生産から経営まで一気通貫。",
+    "植物群落の光合成・蒸散・炭素収支と温室の空間気候をモデル化し、センサー観測から環境介入までを閉じる自律制御基盤。露地・水耕・養蜂・陸上養殖にもドメインプラグインで展開する。",
   disciplines: ["AGR", "AQUA", "BIO", "IOT", "CV", "ML", "VLM", "LLM", "ECON"],
   highlights: [
     {
-      title: "プラグイン式マルチドメイン",
-      body: "水耕・養蜂・養殖を同一基盤上で運用。コアは経営管理基盤としてドメイン非依存に保たれ、新ドメインはプラグインを足すだけで追加できる。",
+      title: "植物群落モデルを制御の起点に",
+      body: "キュウリ群落のキャノピー光合成、維持呼吸、乾物分配、収穫を連続モデルで推定。固定setpointではなく、光・CO₂・温度の律速と植物の生体状態から環境目標を導く。",
     },
     {
-      title: "市場予測まで一気通貫",
-      body: "複数データソースの市場価格を取り込んだ予測エンジンを内蔵。生産だけでなく、出荷タイミング・価格トレンド・モデル誤差検証まで同じ画面で扱える。",
+      title: "速い物理制御と遅い戦略判断",
+      body: "分単位の内ループは決定論的な植物―ハウス結合モデルが担当。時間・日単位の外ループはLLMが経済、作物ステアリング、例外を扱う。安全性と説明可能性を両立する。",
     },
     {
-      title: "培地・養液・栽培スケジュールの自動提案",
-      body: "作物プロファイルから培地配合・養液目標値・播種〜出荷スケジュールを AI が提案。アクアポニクス連携も同一の培地管理ビューで扱える。",
+      title: "観測から実測較正へ",
+      body: "PAR・CO₂・温湿度・土壌温度を分散エッジで収集し、シミュレータを実測と収穫で逐次較正する。まず観測から始め、助言、承認付き介入へ段階的に閉ループ化する。",
     },
   ],
   stack: [
     "Python 3.11 / FastAPI",
     "React 19 + Vite + Tailwind",
     "MQTT / PostgreSQL",
-    "YOLOv11 / Ollama (LLM)",
-    "Plugin-based Domain Vertical",
+    "GreenLight / PCSE-WOFOST / canopy model",
+    "physical-ai-core / DomainVertical plugins",
   ],
   useCases: [
-    "複数ドメインを同時運用する大規模農場",
-    "農協・自治体の地域統合プラットフォーム",
-    "研究機関・実証事業の多ドメイン基盤",
+    "施設園芸の生理駆動型環境制御",
+    "分散した露地・温室の遠隔観測と介入",
+    "農場法人の生産・市場・経営統合",
   ],
   status: "beta",
-  statusLabel: "β / Field trial",
+  statusLabel: "Core / Research implementation",
   media: {
     hero: {
       src: autoJaHero,

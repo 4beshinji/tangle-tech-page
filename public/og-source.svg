@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#071813"/>
+  <g stroke="#d3e8d6" stroke-width="1" opacity=".08">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="64" y="62" width="1072" height="506" fill="none" stroke="#d3e8d6" stroke-opacity=".18"/>
+  <g font-family="Arial, sans-serif">
+    <text x="102" y="118" fill="#a7b8ab" font-size="16" letter-spacing="4">TANGLE TECH / DISTRIBUTED PHYSICAL INTELLIGENCE</text>
+    <text x="98" y="280" fill="#f1f5e9" font-size="75" font-weight="700" letter-spacing="-4">SPACE, AS A</text>
+    <text x="98" y="365" fill="#d8ff9f" font-size="75" font-weight="700" letter-spacing="-4">LIVING SYSTEM.</text>
+    <text x="102" y="438" fill="#a7b8ab" font-size="22">Biological models / Autonomous control / Human operations</text>
+    <text x="102" y="526" fill="#64796c" font-size="14" letter-spacing="3">MAEBASHI, JAPAN — 36.3912° N / 139.0604° E</text>
+  </g>
+  <g transform="translate(930 185)">
+    <g stroke="#75d7c2" stroke-width="2" stroke-dasharray="5 9" opacity=".55">
+      <path d="M0 108L72 28L148 84L200 5"/>
+      <path d="M72 28L110 164L200 115"/>
+    </g>
+    <g fill="#b8f15c">
+      <circle cx="0" cy="108" r="7"/><circle cx="72" cy="28" r="7"/><circle cx="148" cy="84" r="7"/><circle cx="200" cy="5" r="7"/><circle cx="110" cy="164" r="7"/><circle cx="200" cy="115" r="7"/>
+    </g>
+    <g fill="none" stroke="#b8f15c" opacity=".22">
+      <circle cx="0" cy="108" r="22"/><circle cx="72" cy="28" r="31"/><circle cx="148" cy="84" r="25"/><circle cx="200" cy="5" r="28"/><circle cx="110" cy="164" r="25"/><circle cx="200" cy="115" r="30"/>
+    </g>
+  </g>
+</svg>

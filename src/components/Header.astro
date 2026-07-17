@@ -3,49 +3,64 @@ import { NAV_ITEMS } from "@/data/navigation";
 ---
 
 <header
-  class="sticky top-0 z-30 border-b border-(--color-rule) bg-(--color-paper)/92 backdrop-blur-md"
+  class="sticky top-0 z-30 border-b border-(--color-rule) bg-(--color-paper)/94 backdrop-blur-xl"
 >
   <div
-    class="mx-auto flex max-w-(--container-page) items-center justify-between px-6 py-5 lg:px-10"
+    class="mx-auto flex h-[72px] max-w-(--container-page) items-center justify-between px-6 lg:px-10"
   >
     <a
       href="/"
-      class="group flex items-baseline gap-3 no-underline outline-none"
+      class="group flex items-center gap-3 no-underline"
+      aria-label="Tangle Tech ホーム"
     >
-      <span class="display text-[19px] tracking-[-0.02em] text-(--color-ink)">
-        Tangle Tech
-      </span>
-      <span
-        class="mono hidden text-(--color-ink-faint) sm:inline"
+      <svg
+        class="h-8 w-8 text-(--color-accent)"
+        viewBox="0 0 32 32"
+        fill="none"
         aria-hidden="true"
       >
-        ─ TT
+        <path
+          d="M4 7.5H28M4 16H28M4 24.5H28M7.5 4V28M16 4V28M24.5 4V28"
+          stroke="currentColor"
+          stroke-width=".7"
+          opacity=".34"></path>
+        <circle cx="8" cy="21" r="2.2" fill="currentColor"></circle>
+        <circle cx="17" cy="11" r="2.2" fill="currentColor"></circle>
+        <circle cx="25" cy="18" r="2.2" fill="currentColor"></circle>
+        <path d="M8 21L17 11L25 18" stroke="currentColor" stroke-width="1.4"
+        ></path>
+      </svg>
+      <span>
+        <span
+          class="display block text-[17px] tracking-[-0.035em] text-(--color-ink)"
+          >Tangle Tech</span
+        >
+        <span
+          class="mono block text-[7px] tracking-[.17em] text-(--color-ink-faint)"
+          >Distributed Intelligence</span
+        >
       </span>
     </a>
 
-    <nav class="flex items-center gap-6 sm:gap-9">
+    <nav
+      class="flex items-center gap-5 md:gap-8"
+      aria-label="メインナビゲーション"
+    >
       {
         NAV_ITEMS.map(item => (
           <a
             href={item.href}
-            class="mono group flex items-baseline gap-1.5 text-(--color-ink-mid) no-underline transition-colors hover:text-(--color-accent)"
+            class="mono group flex items-center gap-2 text-(--color-ink-mid) no-underline transition-colors hover:text-(--color-accent)"
           >
-            <span class="text-(--color-ink-faint) group-hover:text-(--color-accent)">
+            <span class="hidden text-(--color-ink-faint) lg:inline">
               {item.index}
             </span>
-            <span class="hidden sm:inline">{item.label}</span>
+            <span class:list={[item.index !== "04" && "hidden sm:inline"]}>
+              {item.label}
+            </span>
           </a>
         ))
       }
-      <a
-        href="https://slingstonelog.pages.dev/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mono hidden items-baseline gap-1.5 text-(--color-ink-faint) no-underline transition-colors hover:text-(--color-accent) sm:flex"
-      >
-        <span>Log</span>
-        <span aria-hidden="true">↗</span>
-      </a>
     </nav>
   </div>
 </header>

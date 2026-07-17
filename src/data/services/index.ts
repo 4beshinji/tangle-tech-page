@@ -16,7 +16,16 @@ import { autoBee } from "./auto-bee";
 import { autoJa } from "./auto-ja";
 import { autoAqua } from "./auto-aqua";
 import { hems } from "./hems";
-import { nuai } from "./nuai";
+import { farmOps } from "./farm-ops";
 import { officeToybox } from "./office-toybox";
+import { autoCell } from "./auto-cell";
 
-export const SERVICES = [autoBee, autoJa, autoAqua, hems, nuai, officeToybox];
+export const SERVICES = [
+  autoJa,
+  farmOps,
+  autoAqua,
+  autoBee,
+  officeToybox,
+  hems,
+  autoCell,
+];

@@ -25,7 +25,7 @@ const gallery = service.media?.gallery ?? [];
 
 const breadcrumbJsonLd = buildBreadcrumbList([
   { name: "Tangle Tech", item: new URL("/", Astro.site).toString() },
-  { name: "Works", item: new URL("/#works", Astro.site).toString() },
+  { name: "Systems", item: new URL("/#core", Astro.site).toString() },
   {
     name: `${service.index} ${service.name}`,
     item: new URL(`/services/${service.slug}/`, Astro.site).toString(),
@@ -53,7 +53,7 @@ const breadcrumbJsonLd = buildBreadcrumbList([
     <p class="mono flex items-center gap-3 text-(--color-ink-faint)">
       <a href="/" class="accent-link">Tangle Tech</a>
       <span aria-hidden="true">/</span>
-      <a href="/#works" class="accent-link">Works</a>
+      <a href="/#core" class="accent-link">Systems</a>
       <span aria-hidden="true">/</span>
       <a href={`/services/${service.slug}/`} class="accent-link">
         § {service.index}
@@ -90,8 +90,10 @@ const breadcrumbJsonLd = buildBreadcrumbList([
     </div>
   </Container>
 
-  <!-- Plates — full-bleed ink ground -->
-  <section class="bg-(--color-ink) text-(--color-paper)">
+  <!-- Plates -->
+  <section
+    class="border-y border-(--color-rule-strong) bg-(--color-paper-deep)"
+  >
     <Container class="py-20 lg:py-28">
       <ol class="space-y-20 lg:space-y-28">
         {
@@ -106,11 +108,11 @@ const breadcrumbJsonLd = buildBreadcrumbList([
             return (
               <li class="grid gap-6 lg:grid-cols-12 lg:gap-10">
                 <div class="lg:col-span-2">
-                  <p class="mono text-(--color-paper)/40">
+                  <p class="mono text-(--color-ink-faint)">
                     {isVideo && <span class="text-(--color-accent)">▶ </span>}
                     PL. {String(i + 1).padStart(2, "0")}
                   </p>
-                  <p class="mono mt-2 text-(--color-paper)/30">
+                  <p class="mono mt-2 text-(--color-ink-faint)">
                     of {String(gallery.length).padStart(2, "0")}
                   </p>
                 </div>
@@ -140,8 +142,8 @@ const breadcrumbJsonLd = buildBreadcrumbList([
                     />
                   )}
                   {(g.caption || g.alt) && (
-                    <figcaption class="mono mt-4 text-(--color-paper)/70">
-                      <span class="text-(--color-paper)/40">─</span>{" "}
+                    <figcaption class="mono mt-4 text-(--color-ink-mid)">
+                      <span class="text-(--color-ink-faint)">─</span>{" "}
                       {g.caption ?? g.alt}
                     </figcaption>
                   )}

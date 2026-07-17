@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://tangle-tech.com/",
   author: "Tangle Tech",
   profile: "https://tangle-tech.com/",
-  desc: "市場分析から生産現場、業務管理まで一貫した最適化を行うTangle Techのコーポレートサイト。",
+  desc: "植物群落モデルと自律制御、HR・労務管理を統合し、農場や都市に分散した空間そのものを知能化するTangle Tech。",
   title: "Tangle Tech",
   /** public/ 以下の OG 画像ファイル名 */
   ogImage: "og.png",
@@ -16,8 +16,9 @@ export const SITE = {
 export const COMPANY = {
   name: "Tangle Tech",
   nameJa: "タングルテック",
-  tagline: "もつれた課題を解きほぐす。",
-  mission: "複雑に絡み合った問題をときほぐし、分断された世界を編み合わせる。",
+  tagline: "空間を、ひとつの知能に。",
+  mission:
+    "植物・環境・人の状態をモデル化し、農場や都市に薄く広く分散する自律システムをつくる。",
   email: "4beshinji@gmail.com",
   domain: "tangle-tech.com",
 } as const;

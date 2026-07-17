@@ -1,309 +1,583 @@
 ---
 import Base from "../layouts/Base.astro";
 import Container from "../components/Container.astro";
-import Section from "../components/Section.astro";
-import DisciplineLattice from "../components/DisciplineLattice.astro";
+import DistributedField from "../components/DistributedField.astro";
+import ImageOrImg from "../components/ImageOrImg.astro";
 import { SERVICES } from "../data/services";
 import { COMPANY } from "../config";
 
-// すべての service の disciplines を集約 (重複排除) して company-level lattice にする
-const allDisciplines = Array.from(
-  new Set(SERVICES.flatMap(s => s.disciplines))
+const autoJa = SERVICES.find(service => service.slug === "auto-ja")!;
+const farmOps = SERVICES.find(service => service.slug === "farm-ops")!;
+const demonstrators = SERVICES.filter(
+  service => !["auto-ja", "farm-ops"].includes(service.slug)
 );
+
+const loop = [
+  {
+    key: "01",
+    title: "観測する",
+    body: "温湿度、CO₂、PAR、水質、画像、作業イベントを、離れた現場から共通の時系列へ。",
+  },
+  {
+    key: "02",
+    title: "状態をつくる",
+    body: "センサー値の羅列ではなく、植物・環境・人の現在状態をWorldModelとして再構成する。",
+  },
+  {
+    key: "03",
+    title: "先を計算する",
+    body: "機構モデル、シミュレータ、最適化で介入後の変化を比較し、制約内の候補をつくる。",
+  },
+  {
+    key: "04",
+    title: "介入する",
+    body: "安全な操作は自動で。重大な操作は根拠を添えて人へ提案し、承認後に実行する。",
+  },
+  {
+    key: "05",
+    title: "学び直す",
+    body: "収穫、作業、コスト、結果を監査可能な形で残し、モデルと次の判断へ還流する。",
+  },
+];
 ---
 
-<Base sectionLabel="TT — INDEX / 2026">
-  <!-- ============================================================
-       § 00  HERO
-       ============================================================ -->
-  <Container class="pt-16 pb-24 lg:pt-28 lg:pb-36">
-    <div class="grid gap-10 lg:grid-cols-12">
-      <div class="lg:col-span-7">
-        <p class="mono lift fade text-(--color-ink-mid)">
-          <span class="text-(--color-accent)">§ 00</span> ─ Tangle Tech ─ Autonomous
-          Systems Studio ─ EST. 2025
-        </p>
-
-        <h1
-          class="display mt-10 text-[clamp(3rem,9.2vw,8.4rem)] text-(--color-ink)"
-        >
-          <span class="lift block delay-1">異分野を、</span>
-          <span class="lift block delay-2">
-            <span class="serif-italic font-normal text-(--color-accent)">
-              束ねて
-            </span>
-            編む。
-          </span>
-          <span class="lift block text-(--color-ink-mid) delay-3">
-            Cross-domain<span class="text-(--color-accent)">,</span>
-            <span class="serif-italic">autonomous.</span>
-          </span>
-        </h1>
+<Base sectionLabel="TANGLE TECH — DISTRIBUTED INTELLIGENCE / 2026">
+  <section class="relative border-b border-(--color-rule-strong)">
+    <Container class="py-14 lg:py-24">
+      <div class="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-7">
+          <p class="eyebrow lift">Distributed physical intelligence</p>
+          <h1
+            class="display mt-8 text-[clamp(3.2rem,7.6vw,7.8rem)] text-(--color-ink)"
+          >
+            <span class="lift block delay-1">植物と、人と、</span>
+            <span class="lift block text-(--color-accent-soft) delay-2"
+              >空間を。</span
+            >
+            <span
+              class="lift mt-2 block text-[.58em] leading-[1.12] text-(--color-ink-mid) delay-3"
+              >ひとつの知能として動かす。</span
+            >
+          </h1>
+          <p
+            class="lift mt-9 max-w-2xl text-base leading-[2] text-(--color-ink-mid) delay-4 sm:text-lg"
+          >
+            植物群落の生理モデルと自律制御、働く人のHR・労務管理を接続する。
+            Tangle Techは、農場や都市に小さな知能を薄く広く配置し、
+            離れた場所同士が観測し、判断し、協調する基盤をつくっています。
+          </p>
+          <div class="lift mt-10 flex flex-wrap gap-3 delay-5">
+            <a
+              href="#core"
+              class="inline-flex items-center gap-5 bg-(--color-accent) px-6 py-3.5 font-medium text-(--color-paper-deep) no-underline transition-colors hover:bg-(--color-accent-soft)"
+            >
+              中核システムを見る <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              href="#research"
+              class="inline-flex items-center gap-5 border border-(--color-rule-strong) px-6 py-3.5 text-(--color-ink) no-underline transition-colors hover:border-(--color-accent) hover:text-(--color-accent)"
+            >
+              研究実装 <span aria-hidden="true">↘</span>
+            </a>
+          </div>
+        </div>
+        <div class="lift delay-4 lg:col-span-5">
+          <DistributedField />
+        </div>
       </div>
 
-      <div class="lg:col-span-5 lg:pt-12">
-        <div class="lift fade max-w-md delay-4 lg:ml-auto">
-          <p class="mono text-(--color-ink-faint)">— Statement</p>
-          <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
-            一つの問題を解くのに、本来であれば
-            <em class="serif-italic text-(--color-accent)"> N 人の専門家 </em>
-            が必要だった。
-            <br />
-            だから、協業と越境に必要なコストが高すぎて、現場はいつも「部分最適」で妥協してきた。
-            <br />
-            AI開発の時代でも、構造は変わらない。
-            <br />
-            どれだけ開発が早くなっても、グランドデザインを描くには、
-            <br />
-            <em class="serif-italic text-(--color-accent)">
-              知識を統合する必要があるからだ。
-            </em>
-            <br />
-            TangleTechは、あらゆる分野を束ねて、
-            <br />
-            もつれた課題をときほぐします。
+      <div
+        class="mt-16 grid border-t border-(--color-rule) sm:grid-cols-3 lg:mt-24"
+      >
+        <div
+          class="border-b border-(--color-rule) py-5 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0"
+        >
+          <p class="mono text-(--color-ink-faint)">Biological model</p>
+          <p class="mt-2 text-(--color-ink)">群落光合成・蒸散・炭素収支</p>
+        </div>
+        <div
+          class="border-b border-(--color-rule) py-5 sm:border-r sm:border-b-0 sm:px-6"
+        >
+          <p class="mono text-(--color-ink-faint)">Field autonomy</p>
+          <p class="mt-2 text-(--color-ink)">分散観測・予測・安全な介入</p>
+        </div>
+        <div class="py-5 sm:pl-6">
+          <p class="mono text-(--color-ink-faint)">Human operations</p>
+          <p class="mt-2 text-(--color-ink)">人員・同意・承認・監査</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section
+    id="vision"
+    class="scroll-mt-20 border-b border-(--color-rule-strong) bg-(--color-paper-deep)"
+  >
+    <Container class="py-24 lg:py-36">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3">
+          <p class="section-index">01 / 構想</p>
+        </div>
+        <div class="lg:col-span-9">
+          <p
+            class="display max-w-5xl text-3xl leading-[1.3] text-(--color-ink) sm:text-5xl lg:text-6xl"
+          >
+            知能を集約するのではなく、<br />必要な場所へ分散する。
           </p>
-          <p class="mt-6 text-sm leading-[1.95] text-(--color-ink-mid)">
-            センサ・アクチュエータ・公開情報・最新論文・業務資料・現場知……
-            <br />
-            必要なものはすべて統合する。
-            <br />
-            畑ではビニールハウス解体から植物生理学、青果市場まで。オフィスではゴミ捨てから機械学習モデルを用いた人流監視まで。現場の問題に正面から。
-            <br />
-            ── それが Tangle Tech のやり方です。
+          <div
+            class="mt-14 grid gap-px border border-(--color-rule) bg-(--color-rule) md:grid-cols-2"
+          >
+            <div class="bg-(--color-paper-deep) p-7 lg:p-10">
+              <p class="mono text-(--color-ink-faint)">
+                Dense system / Factory
+              </p>
+              <div
+                class="my-9 flex h-28 items-center justify-center border border-(--color-rule)"
+              >
+                <div class="grid grid-cols-5 gap-1.5" aria-hidden="true">
+                  {
+                    Array.from({ length: 15 }).map(() => (
+                      <span class="h-2.5 w-2.5 bg-(--color-ink-faint)" />
+                    ))
+                  }
+                </div>
+              </div>
+              <p class="text-lg text-(--color-ink)">
+                設備も作業も、一つの場所へ高密度に集まる。
+              </p>
+              <p class="mt-3 leading-[1.9] text-(--color-ink-mid)">
+                従来の自動化が得意とするのは、境界が明確で、通信も電力も安定した閉じた環境です。
+              </p>
+            </div>
+            <div class="bg-(--color-panel) p-7 lg:p-10">
+              <p class="mono text-(--color-accent)">
+                Sparse system / Farm & City
+              </p>
+              <div
+                class="relative my-9 h-28 border border-(--color-rule)"
+                aria-hidden="true"
+              >
+                <span
+                  class="absolute top-[18%] left-[10%] h-2.5 w-2.5 bg-(--color-accent)"
+                ></span>
+                <span
+                  class="absolute top-[62%] left-[27%] h-2.5 w-2.5 bg-(--color-accent)"
+                ></span>
+                <span
+                  class="absolute top-[31%] left-[51%] h-2.5 w-2.5 bg-(--color-accent)"
+                ></span>
+                <span
+                  class="absolute top-[72%] left-[69%] h-2.5 w-2.5 bg-(--color-accent)"
+                ></span>
+                <span
+                  class="absolute top-[17%] left-[87%] h-2.5 w-2.5 bg-(--color-accent)"
+                ></span>
+                <svg
+                  class="absolute inset-0 h-full w-full text-(--color-sky) opacity-50"
+                  viewBox="0 0 500 112"
+                  preserveAspectRatio="none"
+                  ><path
+                    d="M52 24L140 75L258 39L350 85L442 23"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-dasharray="4 8"
+                    fill="none"></path></svg
+                >
+              </div>
+              <p class="text-lg text-(--color-ink)">
+                対象は離れ、環境は揺らぎ、人が間にいる。
+              </p>
+              <p class="mt-3 leading-[1.9] text-(--color-ink-mid)">
+                農場や都市では、現場ごとの小さな知能が自律しながら接続される構成が必要です。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-b border-(--color-rule-strong)">
+    <Container class="py-24 lg:py-32">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3">
+          <p class="section-index">System loop</p>
+        </div>
+        <div class="lg:col-span-9">
+          <h2 class="display text-3xl text-(--color-ink) sm:text-5xl">
+            現実を読み、先を計算し、<br />結果から学び直す。
+          </h2>
+          <ol class="mt-14 border-t border-(--color-rule-strong)">
+            {
+              loop.map((item, i) => (
+                <li class="group grid gap-4 border-b border-(--color-rule) py-7 transition-colors hover:bg-(--color-panel) sm:grid-cols-12 sm:gap-6 sm:px-4">
+                  <span class="mono text-(--color-accent) sm:col-span-1">
+                    {item.key}
+                  </span>
+                  <h3 class="display text-xl text-(--color-ink) sm:col-span-4 sm:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
+                    {item.body}
+                  </p>
+                  <span
+                    class="hidden text-right text-(--color-ink-faint) sm:block"
+                    aria-hidden="true"
+                  >
+                    {i === loop.length - 1 ? "↺" : "↓"}
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section id="core" class="scroll-mt-20 border-b border-(--color-rule-strong)">
+    <Container class="py-24 lg:py-36">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3">
+          <p class="section-index">02 / 中核システム</p>
+        </div>
+        <div class="lg:col-span-9">
+          <h2
+            class="display max-w-4xl text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl"
+          >
+            ほ場の知能と、<br />人のオペレーション。
+          </h2>
+          <p
+            class="mt-7 max-w-3xl text-base leading-[2] text-(--color-ink-mid)"
+          >
+            二つを一つの巨大システムに混ぜません。異なる時間軸と安全要件を持つため、責務を分け、イベントと承認で接続します。
           </p>
         </div>
       </div>
-    </div>
 
-    <!-- Company-level discipline lattice -->
-    <div
-      class="lift fade mt-20 border-t border-(--color-rule) pt-6 delay-5 lg:mt-32"
-    >
-      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-10">
-        <span class="mono shrink-0 text-(--color-ink-faint)">
-          Disciplines we weave
-        </span>
-        <DisciplineLattice codes={allDisciplines} />
-      </div>
-    </div>
-  </Container>
-
-  <!-- ============================================================
-       § 01  PRACTICE — manifesto
-       ============================================================ -->
-  <Section
-    index="01"
-    label="Practice"
-    bordered
-    class="scroll-mt-24"
-    containerClass="py-24 lg:py-36"
-  >
-    <h2 class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl">
-      <span class="serif-italic font-normal text-(--color-accent)">
-        N つの分野
-      </span>
-      を、 1 つのシステムに。
-    </h2>
-
-    <div class="mt-16 divide-y divide-(--color-rule)">
-      {
-        [
-          {
-            num: "i.",
-            jp: "世界を知覚する",
-            en: "Sense the field",
-            body: "人の目から機械の目へ。人の判断をAIの判断に。非構造化データもシステムに統合して、必要なら空間情報も付与。複雑で曖昧なフィールドを複雑なまま理解する。",
-          },
-          {
-            num: "ii.",
-            jp: "知識と接続する",
-            en: "Bridge to knowledge",
-            body: "フィールドのデータを、市場・論文・社内ナレッジといった『分野横断の情報』と接続。専門家チームが分析するように、あなたの眼の前を分析。",
-          },
-          {
-            num: "iii.",
-            jp: "収集、判断、介入、提案。",
-            en: "Collect, judge, act, propose",
-            body: "情報を収集する。LLMから専用機械学習モデル、ただのif文まで、課題の要求に合わせて。自動化し、人間と協業する。リスクとコストの現実的なバランス。",
-          },
-        ].map(t => (
-          <div class="grid gap-4 py-10 lg:grid-cols-12 lg:gap-6">
-            <div class="lg:col-span-2">
-              <span class="serif-italic text-3xl text-(--color-accent)">
-                {t.num}
-              </span>
-            </div>
-            <div class="lg:col-span-4">
-              <p class="display text-2xl text-(--color-ink) lg:text-3xl">
-                {t.jp}
-              </p>
-              <p class="mono mt-2 text-(--color-ink-faint)">{t.en}</p>
-            </div>
-            <p class="text-base leading-[1.95] text-(--color-ink-mid) lg:col-span-6">
-              {t.body}
+      <article
+        class="mt-20 border border-(--color-rule-strong) bg-(--color-panel) lg:mt-28"
+      >
+        <div class="grid lg:grid-cols-2">
+          <div class="p-7 lg:p-12">
+            <p class="mono text-(--color-accent)">
+              Core 01 / Field intelligence
             </p>
+            <h3 class="display mt-5 text-4xl text-(--color-ink) sm:text-6xl">
+              {autoJa.name}
+            </h3>
+            <p class="mt-5 text-xl leading-[1.65] text-(--color-accent-soft)">
+              {autoJa.tagline}
+            </p>
+            <p class="mt-7 leading-[1.95] text-(--color-ink-mid)">
+              {autoJa.pitch}
+            </p>
+            <ul class="mt-9 space-y-4 border-t border-(--color-rule) pt-7">
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-accent)">A</span><span
+                  >連続発達・キャノピー光合成・乾物分配</span
+                >
+              </li>
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-accent)">B</span><span
+                  >温室空間気候・GreenLight / PCSE シミュレーション</span
+                >
+              </li>
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-accent)">C</span><span
+                  >SensorSwarm・WorldModel・安全なアクチュエーション</span
+                >
+              </li>
+            </ul>
+            <a
+              href={`/services/${autoJa.slug}/`}
+              class="mt-10 inline-flex items-center gap-5 border-b border-(--color-ink-mid) pb-1 no-underline transition-colors hover:border-(--color-accent) hover:text-(--color-accent)"
+              >詳細を見る <span>→</span></a
+            >
           </div>
-        ))
-      }
-    </div>
-  </Section>
+          <div
+            class="topography flex min-h-[360px] items-center justify-center border-t border-(--color-rule) p-6 lg:border-t-0 lg:border-l"
+          >
+            {
+              autoJa.media?.hero && (
+                <ImageOrImg
+                  src={autoJa.media.hero.src}
+                  alt={autoJa.media.hero.alt}
+                  class="w-full border border-(--color-rule-strong) shadow-2xl shadow-black/30"
+                  widths={[640, 960]}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )
+            }
+          </div>
+        </div>
+      </article>
 
-  <!-- ============================================================
-       § 02  WORKS — services list
-       ============================================================ -->
+      <article
+        class="border-x border-b border-(--color-rule-strong) bg-(--color-paper-deep)"
+      >
+        <div class="grid lg:grid-cols-2">
+          <div
+            class="topography order-2 flex min-h-[390px] items-center justify-center border-t border-(--color-rule) p-7 lg:order-1 lg:border-t-0 lg:border-r lg:p-12"
+          >
+            <div
+              class="w-full max-w-lg border border-(--color-rule-strong) bg-(--color-paper) p-5 shadow-2xl shadow-black/30"
+            >
+              <div
+                class="flex items-center justify-between border-b border-(--color-rule) pb-4"
+              >
+                <p class="mono text-(--color-ink-mid)">
+                  Assignment proposal / #F-028
+                </p><span class="h-2 w-2 bg-(--color-accent)"></span>
+              </div>
+              <div class="grid grid-cols-3 gap-px bg-(--color-rule)">
+                <div class="col-span-2 bg-(--color-paper) py-5">
+                  <p class="mono text-(--color-ink-faint)">Task</p><p
+                    class="mt-2"
+                  >
+                    第3棟 / 側窓点検
+                  </p>
+                </div>
+                <div class="bg-(--color-paper) py-5 pl-4">
+                  <p class="mono text-(--color-ink-faint)">Due</p><p
+                    class="mt-2"
+                  >
+                    14:30
+                  </p>
+                </div>
+              </div>
+              <div class="border-t border-(--color-rule) py-5">
+                <p class="mono text-(--color-ink-faint)">Reason</p><p
+                  class="mt-2 leading-[1.8] text-(--color-ink-mid)"
+                >
+                  気温上昇率と換気応答の不一致を検出。自動操作ではなく、現地確認を提案。
+                </p>
+              </div>
+              <div class="flex gap-3 border-t border-(--color-rule) pt-5">
+                <span
+                  class="bg-(--color-accent) px-4 py-2 text-sm text-(--color-paper-deep)"
+                  >承認</span
+                ><span
+                  class="border border-(--color-rule-strong) px-4 py-2 text-sm text-(--color-ink-mid)"
+                  >差し戻す</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="order-1 p-7 lg:order-2 lg:p-12">
+            <p class="mono text-(--color-sky)">Core 02 / Human operations</p>
+            <h3 class="display mt-5 text-4xl text-(--color-ink) sm:text-6xl">
+              {farmOps.name}
+            </h3>
+            <p class="mt-5 text-xl leading-[1.65] text-(--color-accent-soft)">
+              {farmOps.tagline}
+            </p>
+            <p class="mt-7 leading-[1.95] text-(--color-ink-mid)">
+              {farmOps.pitch}
+            </p>
+            <ul class="mt-9 space-y-4 border-t border-(--color-rule) pt-7">
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-sky)">A</span><span
+                  >HR・雇用・部門・スキル・RBAC</span
+                >
+              </li>
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-sky)">B</span><span
+                  >タスク抽出・担当提案・承認・エスカレーション</span
+                >
+              </li>
+              <li class="flex gap-4">
+                <span class="mono mt-1 text-(--color-sky)">C</span><span
+                  >同意ゲート・ローカル推論・監査ログ</span
+                >
+              </li>
+            </ul>
+            <a
+              href={`/services/${farmOps.slug}/`}
+              class="mt-10 inline-flex items-center gap-5 border-b border-(--color-ink-mid) pb-1 no-underline transition-colors hover:border-(--color-accent) hover:text-(--color-accent)"
+              >詳細を見る <span>→</span></a
+            >
+          </div>
+        </div>
+      </article>
+    </Container>
+  </section>
+
   <section
-    id="works"
-    class="scroll-mt-24 border-t border-(--color-rule-strong)"
+    id="research"
+    class="scroll-mt-20 border-b border-(--color-rule-strong) bg-(--color-paper-deep)"
   >
-    <Container class="pt-24 lg:pt-32">
-      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+    <Container class="py-24 lg:py-36">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
         <div class="lg:col-span-3">
-          <p class="section-index">02 / Works</p>
+          <p class="section-index">03 / 研究実装</p>
         </div>
         <div class="lg:col-span-9">
           <h2
             class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl"
           >
-            あらゆるドメインから、最適化。
+            モデルの精度も、<br />未完了も、隠さない。
           </h2>
-          <p class="mt-6 max-w-2xl leading-[1.95] text-(--color-ink-mid)">
-            家庭、農場、オフィス、企業全体。あらゆる場所に思いもよらない価値を。
+          <p class="mt-7 max-w-3xl leading-[2] text-(--color-ink-mid)">
+            研究コード、ベンチ実装、現地実証は同じ「開発中」ではありません。いま何が動き、どこからが仮説なのかを分けて公開します。
           </p>
+
+          <div class="mt-14 border-t border-(--color-rule-strong)">
+            <div
+              class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
+            >
+              <p class="mono text-(--color-accent) sm:col-span-2">
+                Implemented
+              </p>
+              <div class="sm:col-span-4">
+                <h3 class="display text-xl">キュウリ群落モデル</h3><p
+                  class="mono mt-2 text-(--color-ink-faint)"
+                >
+                  Research-only
+                </p>
+              </div>
+              <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
+                光合成、維持呼吸、ソース・シンク、乾物分配を実装。AGC
+                2018データで残差要因まで検証し、独立holdout前の研究モデルとして管理。
+              </p>
+            </div>
+            <div
+              class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
+            >
+              <p class="mono text-(--color-accent) sm:col-span-2">
+                Implemented
+              </p>
+              <div class="sm:col-span-4">
+                <h3 class="display text-xl">温室シミュレーション</h3><p
+                  class="mono mt-2 text-(--color-ink-faint)"
+                >
+                  Deterministic harness
+                </p>
+              </div>
+              <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
+                GreenLight系とPCSE/WOFOSTを隔離workerで実行。国内の気象・価格・高温・VPD・結露制約を明示し、制御候補を比較する。
+              </p>
+            </div>
+            <div
+              class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
+            >
+              <p class="mono text-(--color-sky) sm:col-span-2">Bench-ready</p>
+              <div class="sm:col-span-4">
+                <h3 class="display text-xl">分散観測アップリンク</h3><p
+                  class="mono mt-2 text-(--color-ink-faint)"
+                >
+                  Field verification pending
+                </p>
+              </div>
+              <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
+                ESP-NOW LR、Raspberry
+                Pi、DuckDB、Tailscale、MQTTの観測経路を実装。農家ハウスでの24時間E2E、72時間commissioning、14日連続観測はこれから。
+              </p>
+            </div>
+            <div
+              class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
+            >
+              <p class="mono text-(--color-soil) sm:col-span-2">Integration</p>
+              <div class="sm:col-span-4">
+                <h3 class="display text-xl">auto_JA × farm-ops</h3><p
+                  class="mono mt-2 text-(--color-ink-faint)"
+                >
+                  Contract defined
+                </p>
+              </div>
+              <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
+                ほ場イベント、作業割当、労務還流、同意、HITL承認の責務と契約を定義。両システム間の連携実装を進行中。
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Container>
-
-    <ol class="mx-auto mt-20 max-w-(--container-page) lg:mt-28">
-      <li class="border-t border-(--color-rule-strong)"></li>
-      {
-        SERVICES.map(service => (
-          <li class="service-row group border-b border-(--color-rule)">
-            <a
-              href={`/services/${service.slug}/`}
-              class="block px-6 py-10 no-underline lg:grid lg:grid-cols-12 lg:gap-6 lg:px-10 lg:py-12"
-            >
-              <div class="mono flex items-center gap-3 text-(--color-ink-faint) lg:col-span-2">
-                <span class="text-(--color-accent)">§</span>
-                <span class="text-2xl font-normal tracking-[0.04em] text-(--color-ink-mid)">
-                  {service.index}
-                </span>
-              </div>
-
-              <div class="mt-3 lg:col-span-7 lg:mt-0">
-                <p class="mono text-(--color-ink-faint)">{service.category}</p>
-                <h3 class="display service-row__title mt-2 text-3xl text-(--color-ink) sm:text-4xl lg:text-5xl">
-                  {service.name}
-                </h3>
-                <p class="serif-italic mt-3 text-lg text-(--color-ink-mid) lg:text-xl">
-                  {service.tagline}
-                </p>
-
-                <div class="lattice mt-6">
-                  {service.disciplines.map(d => (
-                    <span>{d}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div class="mt-6 flex items-end justify-between lg:col-span-3 lg:mt-0 lg:flex-col lg:items-end lg:justify-between">
-                <span class="mono text-(--color-ink-faint)">
-                  {service.statusLabel}
-                </span>
-                <span class="mono text-(--color-ink) transition-transform group-hover:translate-x-1 group-hover:text-(--color-accent)">
-                  Read ─→
-                </span>
-              </div>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
   </section>
 
-  <!-- ============================================================
-       § 03  ABOUT
-       ============================================================ -->
-  <Section
-    index="03"
-    label="About"
-    bordered
-    class="scroll-mt-24"
-    containerClass="py-24 lg:py-36"
+  <section class="border-b border-(--color-rule-strong)">
+    <Container class="py-24 lg:py-36">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3">
+          <p class="section-index">Technology demonstrators</p>
+        </div>
+        <div class="lg:col-span-9">
+          <h2 class="display text-3xl text-(--color-ink) sm:text-5xl">
+            異なる現場で、<br />共通コアの限界を試す。
+          </h2>
+          <p class="mt-7 max-w-3xl leading-[2] text-(--color-ink-mid)">
+            養殖、養蜂、空間管理、家庭、細胞培養。これらは独立事業の羅列ではなく、知覚・制御・監査の共通アーキテクチャを検証する技術デモです。
+          </p>
+        </div>
+      </div>
+
+      <ol
+        class="mt-16 grid border-t border-l border-(--color-rule) sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
+      >
+        {
+          demonstrators.map(service => (
+            <li class="service-row border-r border-b border-(--color-rule)">
+              <a
+                href={`/services/${service.slug}/`}
+                class="flex h-full min-h-[300px] flex-col p-7 no-underline lg:p-9"
+              >
+                <div class="flex items-center justify-between">
+                  <>
+                    <span class="mono text-(--color-accent)">
+                      {service.index}
+                    </span>
+                    <span class="mono text-(--color-ink-faint)">
+                      {service.statusLabel}
+                    </span>
+                  </>
+                </div>
+                <p class="mono mt-10 text-(--color-ink-faint)">
+                  {service.category.replace("Technology Demonstrator / ", "")}
+                </p>
+                <h3 class="display service-row__title mt-3 text-2xl text-(--color-ink) sm:text-3xl">
+                  {service.name}
+                </h3>
+                <p class="mt-5 leading-[1.85] text-(--color-ink-mid)">
+                  {service.tagline}
+                </p>
+                <span class="mono mt-auto pt-9 text-(--color-ink-mid)">
+                  View study →
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </section>
+
+  <section
+    id="contact"
+    class="scroll-mt-20 bg-(--color-accent) text-(--color-paper-deep)"
   >
-    <p
-      class="serif-italic text-3xl leading-[1.45] text-(--color-ink) sm:text-5xl lg:text-[3.6rem]"
-    >
-      “ 1つのシステムに、
-      <span class="text-(--color-accent)">8つの専門分野</span>
-      が必要なら、その8つを統合する。”
-    </p>
-
-    <div class="mt-16 grid gap-12 lg:grid-cols-2">
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Origin</p>
-        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
-          Tangle Tech
-          は要求される知見が多分野に跨がり、「人月の神話」に従い各種コスト的制約によって不可能だったシステムを高速で実現します。
-        </p>
+    <Container class="py-20 lg:py-28">
+      <div class="grid items-end gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-8">
+          <p class="mono text-(--color-paper-deep)/60">04 / Contact</p>
+          <h2 class="display mt-6 text-4xl sm:text-6xl lg:text-7xl">
+            現場を、観測から始める。
+          </h2>
+          <p
+            class="mt-7 max-w-2xl text-base leading-[1.9] text-(--color-paper-deep)/75"
+          >
+            温室・農場の観測設計、分散エッジ、モデル検証、HR・承認基盤について。完成品を装うのではなく、現場の制約と検証範囲から話します。
+          </p>
+        </div>
+        <div class="lg:col-span-4 lg:text-right">
+          <a
+            href={`mailto:${COMPANY.email}`}
+            class="display inline-block border-b border-(--color-paper-deep) pb-2 text-2xl no-underline sm:text-3xl"
+            >{COMPANY.email} ↗</a
+          >
+        </div>
       </div>
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Architecture</p>
-        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
-          IoTからLLM、匿名化まで。必要なものすべてを、最低限。本当にそれが必要？と常にイシューに立ち返ります。
-        </p>
-      </div>
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Sovereignty</p>
-        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
-          データ主権を最優先。ローカル
-          LLMと自前のエッジ計算で完結し、クラウドAIの不安定な品質に依存しません。
-        </p>
-      </div>
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Operating Principle</p>
-        <p class="mt-4 text-base leading-[1.95] text-(--color-ink)">
-          現実的な自動化。現実的な自律AI。従来的な制御とLLMの協働。if文、PID制御、機械学習モデル、LLM……課題に最適な手法で自律、監視、介入、提案を。
-        </p>
-      </div>
-    </div>
-  </Section>
-
-  <!-- ============================================================
-       § 04  CONTACT
-       ============================================================ -->
-  <Section
-    index="04"
-    label="Contact"
-    bordered
-    class="scroll-mt-24"
-    containerClass="py-24 lg:py-36"
-  >
-    <h2 class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-7xl">
-      ドラスティックな
-      <br />
-      最適化を求める人へ。
-    </h2>
-
-    <div
-      class="mt-16 grid gap-12 border-t border-(--color-rule) pt-12 lg:grid-cols-2"
-    >
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Inquiries</p>
-        <p class="mt-3 leading-[1.9] text-(--color-ink-mid)">
-          導入相談・実証実験・受託開発・登壇・取材依頼など、お気軽にご連絡ください。
-        </p>
-      </div>
-      <div>
-        <p class="mono text-(--color-ink-faint)">— Email</p>
-        <a
-          href={`mailto:${COMPANY.email}`}
-          class="display mt-3 inline-block text-2xl text-(--color-ink) sm:text-4xl lg:text-5xl"
-        >
-          <span class="accent-link">{COMPANY.email}</span>
-          <span class="caret"></span>
-        </a>
-      </div>
-    </div>
-  </Section>
+    </Container>
+  </section>
 </Base>

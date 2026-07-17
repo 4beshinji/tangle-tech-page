@@ -7,11 +7,11 @@ import type { Service } from "./types";
 
 export const autoAqua: Service = {
   slug: "auto-aqua",
-  index: "003",
+  index: "101",
   name: "Auto Aqua",
   nameLatin: "Auto Aqua",
-  category: "Land-based Aquaculture",
-  tagline: "陸上養殖を、賃貸投資感覚に。",
+  category: "Technology Demonstrator / Aquaculture",
+  tagline: "水質と個体を同時に見て、養殖の判断を閉じる。",
   pitch:
     "水質センサーと個体認識 AI を組み合わせ、給餌・水換え・疾病検知まで自律化するクルマエビ陸上養殖管理システム。",
   disciplines: ["AQUA", "BIO", "IOT", "CV", "ML", "LLM", "EMB", "CTRL"],

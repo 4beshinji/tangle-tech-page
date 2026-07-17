@@ -1,0 +1,142 @@
+<div
+  class="field-map"
+  aria-label="農場や都市に分散する自律ノードの概念図"
+  role="img"
+>
+  <svg viewBox="0 0 760 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g class="field-map__grid" stroke="currentColor" stroke-width="1">
+      <path d="M0 120H760M0 240H760M0 360H760M0 480H760"></path>
+      <path d="M152 0V600M304 0V600M456 0V600M608 0V600"></path>
+    </g>
+
+    <g
+      class="field-map__routes"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-dasharray="4 9"
+    >
+      <path
+        d="M105 462C192 373 201 303 287 273C373 243 420 325 510 247C563 201 603 153 667 125"
+      ></path>
+      <path d="M105 462C213 500 320 494 392 428C449 376 520 370 637 431"></path>
+      <path d="M287 273C341 199 389 153 470 137C534 125 596 123 667 125"></path>
+    </g>
+
+    <g class="field-map__zone" stroke="currentColor">
+      <path d="M55 401L137 363L208 411L125 451L55 401Z"></path>
+      <path d="M77 402L137 375L187 412L126 440L77 402Z"></path>
+      <path d="M278 208H400V314H278V208Z"></path>
+      <path d="M278 208L339 168L400 208"></path>
+      <path d="M299 226V296M323 211V296M347 211V296M371 226V296"></path>
+      <path d="M561 376L674 343L721 409L610 445L561 376Z"></path>
+      <path d="M577 382L675 354M588 398L687 369M599 415L699 385"></path>
+    </g>
+
+    <g class="field-map__nodes">
+      <g transform="translate(105 462)">
+        <circle class="field-map__pulse" r="27"></circle>
+        <circle r="7"></circle>
+        <text x="18" y="5">FIELD 03</text>
+      </g>
+      <g transform="translate(287 273)">
+        <circle class="field-map__pulse field-map__pulse--2" r="34"></circle>
+        <circle r="9"></circle>
+        <text x="20" y="5">GREENHOUSE 01</text>
+      </g>
+      <g transform="translate(510 247)">
+        <circle class="field-map__pulse field-map__pulse--3" r="25"></circle>
+        <circle r="7"></circle>
+        <text x="18" y="5">WATER 02</text>
+      </g>
+      <g transform="translate(667 125)">
+        <circle class="field-map__pulse" r="28"></circle>
+        <circle r="7"></circle>
+        <text x="-95" y="-18">CITY 04</text>
+      </g>
+      <g transform="translate(392 428)">
+        <circle class="field-map__pulse field-map__pulse--2" r="24"></circle>
+        <circle r="7"></circle>
+        <text x="18" y="5">HIVE 05</text>
+      </g>
+      <g transform="translate(637 431)">
+        <circle class="field-map__pulse field-map__pulse--3" r="30"></circle>
+        <circle r="8"></circle>
+        <text x="-102" y="43">PEOPLE 06</text>
+      </g>
+    </g>
+
+    <g class="field-map__readout">
+      <text x="28" y="36">DISTRIBUTED FIELD / LIVE TOPOLOGY</text>
+      <text x="28" y="57">36.3912° N, 139.0604° E</text>
+      <text x="555" y="561">NODES 06 / LINK 09</text>
+      <text x="555" y="580">MODEL STATE / SYNC</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .field-map {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-rule-strong);
+    background: var(--color-paper-deep);
+    color: var(--color-ink-faint);
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .field-map__grid {
+    opacity: 0.16;
+  }
+  .field-map__routes {
+    color: var(--color-sky);
+    opacity: 0.56;
+  }
+  .field-map__zone {
+    color: var(--color-ink-mid);
+    opacity: 0.36;
+  }
+  .field-map__nodes {
+    color: var(--color-accent);
+  }
+  .field-map__nodes circle:not(.field-map__pulse) {
+    fill: currentColor;
+  }
+  .field-map__nodes text,
+  .field-map__readout text {
+    fill: var(--color-ink-mid);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .field-map__readout text {
+    fill: var(--color-ink-faint);
+  }
+  .field-map__pulse {
+    fill: none;
+    stroke: currentColor;
+    opacity: 0.25;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: map-pulse 3.4s ease-out infinite;
+  }
+  .field-map__pulse--2 {
+    animation-delay: -1.1s;
+  }
+  .field-map__pulse--3 {
+    animation-delay: -2.2s;
+  }
+  @keyframes map-pulse {
+    0% {
+      opacity: 0.6;
+      transform: scale(0.35);
+    }
+    75%,
+    100% {
+      opacity: 0;
+      transform: scale(1.35);
+    }
+  }
+</style>

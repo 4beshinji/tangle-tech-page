@@ -7,11 +7,11 @@ import type { Service } from "./types";
 
 export const hems: Service = {
   slug: "hems",
-  index: "004",
+  index: "104",
   name: "HEMS",
   nameLatin: "Home Embodied AI",
-  category: "Personal Assistant",
-  tagline: "家とくらしに、寄り添う AI。",
+  category: "Technology Demonstrator / Home",
+  tagline: "生活空間を、ローカルな知識と制御につなぐ。",
   pitch:
     "家電制御・買い物管理・チャット・知識検索・バイオメトリクスを束ね、3D VRM アバターやPSD立ち絵等で応対する家庭向け AI アシスタント。",
   disciplines: ["IOT", "LLM", "TTS", "3D", "NLP", "BIO", "CV", "KG"],

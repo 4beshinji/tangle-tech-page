@@ -7,11 +7,11 @@ import type { Service } from "./types";
 
 export const officeToybox: Service = {
   slug: "office-toybox",
-  index: "006",
-  name: "Office as AI Toybox",
+  index: "103",
+  name: "SOMS",
   nameLatin: "SOMS",
-  category: "Autonomous Site Operations",
-  tagline: "GPU とセンサーと人間が、オフィスを自律運転する。",
+  category: "Technology Demonstrator / Spatial Operations",
+  tagline: "ローカルな知能を、空間ごとに配置する。",
   pitch:
     "拠点ごとに AI ノードを置き、ReAct LLM と多視点カメラ追跡でオフィス空間を監視・運営する自律ハブ。データはノード内に閉じる。",
   disciplines: ["IOT", "CV", "MTMC", "LLM", "FED", "GPU", "EDGE", "AUDIT"],
@@ -46,7 +46,7 @@ export const officeToybox: Service = {
   media: {
     hero: {
       src: officeToyboxHero,
-      alt: "Office as AI Toybox の利用者向けダッシュボード",
+      alt: "SOMS の利用者向けダッシュボード",
       caption: "Sushitech2026 出展用カスタム ─ NUNUAI 様向けに提供",
       context:
         "完全オフライン前提でチャット側にイベント案内・挨拶・NUNUPC 様紹介を実装。TTS は『顔を向けないと話さない』『通行人数に応じた発話』など対人インタラクトを強化。前夜から指定 PC への OS インストール＋約 250GB のエコシステム導入を貧弱回線下で完遂。流動的な前提と厳しい環境制約の下でも極短期間での開発が可能。",

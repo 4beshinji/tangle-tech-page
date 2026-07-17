@@ -34,8 +34,8 @@ const caption = item.caption ?? item.alt;
         loading="lazy"
         decoding="async"
       />
-      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
-        {plateNum && <span class="text-(--color-paper)/40">{plateNum}</span>}
+      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-ink-mid)">
+        {plateNum && <span class="text-(--color-ink-faint)">{plateNum}</span>}
         <span>{caption}</span>
       </figcaption>
     </figure>
@@ -53,8 +53,8 @@ const caption = item.caption ?? item.alt;
         aria-label={item.alt}
         class="w-full"
       />
-      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-paper)/70">
-        {plateNum && <span class="text-(--color-paper)/40">{plateNum}</span>}
+      <figcaption class="mono mt-3 flex items-baseline gap-3 text-(--color-ink-mid)">
+        {plateNum && <span class="text-(--color-ink-faint)">{plateNum}</span>}
         <span class="text-(--color-accent)">▶</span>
         <span>{caption}</span>
       </figcaption>

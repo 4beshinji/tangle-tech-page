@@ -7,11 +7,11 @@ import type { Service } from "./types";
 
 export const autoBee: Service = {
   slug: "auto-bee",
-  index: "001",
+  index: "102",
   name: "Auto Bee",
   nameLatin: "Auto Bee",
-  category: "Apiculture",
-  tagline: "蜂の巣すら溶けだす温暖化時代の養蜂管理。",
+  category: "Technology Demonstrator / Apiculture",
+  tagline: "巣箱の内側と、その周囲の植生を一つの系として見る。",
   pitch:
     "巣箱の設置位置決定支援からモニタリング・分蜂検知まで、IoT センサー・画像認識・LLM エージェントで一貫管理する自律養蜂システム。",
   disciplines: ["AGR", "BIO", "IOT", "CV", "ML", "LLM", "GIS", "ECON"],

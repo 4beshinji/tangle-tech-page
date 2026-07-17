@@ -28,7 +28,7 @@ const GALLERY_INLINE_MAX = 4;
 
 const breadcrumbJsonLd = buildBreadcrumbList([
   { name: "Tangle Tech", item: new URL("/", Astro.site).toString() },
-  { name: "Works", item: new URL("/#works", Astro.site).toString() },
+  { name: "Systems", item: new URL("/#core", Astro.site).toString() },
   {
     name: `${service.index} ${service.name}`,
     item: new URL(`/services/${service.slug}/`, Astro.site).toString(),
@@ -60,7 +60,7 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
     <p class="mono flex items-center gap-3 text-(--color-ink-faint)">
       <a href="/" class="accent-link">Tangle Tech</a>
       <span aria-hidden="true">/</span>
-      <a href="/#works" class="accent-link">Works</a>
+      <a href="/#core" class="accent-link">Systems</a>
       <span aria-hidden="true">/</span>
       <span class="text-(--color-ink-mid)"
         >§ {service.index} {service.name}</span
@@ -74,11 +74,11 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
   <ServiceHeader service={service} totalIndex={totalIndex} />
 
   <!-- ============================================================
-       Hero image — INK BAND (white screenshots invert against ink ground)
+       Hero image
        ============================================================ -->
   {
     service.media?.hero && (
-      <section class="bg-(--color-ink) text-(--color-paper)">
+      <section class="border-y border-(--color-rule-strong) bg-(--color-paper-deep)">
         <MediaHero media={service.media.hero} />
       </section>
     )
@@ -155,19 +155,19 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
   </Section>
 
   <!-- ============================================================
-       Gallery — INK BAND (truncated to 4, links to /gallery/<slug>/ if more)
+       Gallery
        ============================================================ -->
   {
     galleryAll.length > 0 && (
-      <section class="bg-(--color-ink) text-(--color-paper)">
+      <section class="border-y border-(--color-rule-strong) bg-(--color-paper-deep)">
         <Container class="py-20 lg:py-28">
           <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
             <div class="lg:col-span-3">
-              <p class="mono text-(--color-paper)/60">
+              <p class="mono text-(--color-ink-mid)">
                 <span class="text-(--color-accent)">§</span> D / Plates
               </p>
               {galleryHasMore && (
-                <p class="mono mt-3 text-(--color-paper)/40">
+                <p class="mono mt-3 text-(--color-ink-faint)">
                   Showing {GALLERY_INLINE_MAX} of {galleryAll.length}
                 </p>
               )}
@@ -183,16 +183,16 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
           </div>
 
           {galleryHasMore && (
-            <div class="mt-16 grid gap-6 border-t border-(--color-paper)/15 pt-10 lg:grid-cols-12">
+            <div class="mt-16 grid gap-6 border-t border-(--color-rule) pt-10 lg:grid-cols-12">
               <div class="lg:col-span-3" />
               <a
                 href={`/gallery/${service.slug}/`}
-                class="display group flex items-baseline gap-4 text-2xl text-(--color-paper) no-underline lg:col-span-9 lg:text-4xl"
+                class="display group flex items-baseline gap-4 text-2xl text-(--color-ink) no-underline lg:col-span-9 lg:text-4xl"
               >
-                <span class="border-b border-(--color-paper)/40 pb-1 transition-colors group-hover:border-(--color-accent) group-hover:text-(--color-accent)">
+                <span class="border-b border-(--color-rule-strong) pb-1 transition-colors group-hover:border-(--color-accent) group-hover:text-(--color-accent)">
                   View all {galleryAll.length} plates
                 </span>
-                <span class="mono text-(--color-paper)/60 transition-transform group-hover:translate-x-1 group-hover:text-(--color-accent)">
+                <span class="mono text-(--color-ink-mid) transition-transform group-hover:translate-x-1 group-hover:text-(--color-accent)">
                   ─→
                 </span>
               </a>
@@ -208,9 +208,9 @@ const galleryHasMore = galleryAll.length > GALLERY_INLINE_MAX;
        ============================================================ -->
   <Section index="E" label="Inquiries" bordered>
     <p class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl">
-      導入・実証実験・受託、
+      観測・検証・共同実装、
       <br class="hidden sm:block" />
-      お話しましょう。
+      現場から始めましょう。
     </p>
     <a
       href={`mailto:${COMPANY.email}`}
