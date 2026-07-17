@@ -12,8 +12,8 @@ export const autoCell: Service = {
   disciplines: ["BIO", "IOT", "ML", "LLM", "CTRL", "AUDIT", "POLICY"],
   highlights: [
     {
-      title: "高速制御をLLMに委ねない",
-      body: "pH・DO・温度は決定的なL0/L1が担当し、MLはrun間最適化、LLMは説明・例外・承認仲介に限定する。",
+      title: "決定的制御とAI判断支援の階層化",
+      body: "L0/L1がpH・DO・温度を決定的に制御し、MLがrun間の条件を最適化。LLMは状態説明、例外処理、承認要求を担当する。",
     },
     {
       title: "文献ベースのデジタルツイン",

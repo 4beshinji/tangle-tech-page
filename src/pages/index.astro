@@ -21,7 +21,7 @@ const loop = [
   {
     key: "02",
     title: "状態をつくる",
-    body: "センサー値の羅列ではなく、植物・環境・人の現在状態をWorldModelとして再構成する。",
+    body: "センサー、画像、作業イベントを統合し、植物・環境・人の現在状態をWorldModelとして構成する。",
   },
   {
     key: "03",
@@ -122,7 +122,7 @@ const loop = [
           <p
             class="display max-w-5xl text-3xl leading-[1.3] text-(--color-ink) sm:text-5xl lg:text-6xl"
           >
-            知能を集約するのではなく、<br />必要な場所へ分散する。
+            必要な場所へ、<br />知能を分散する。
           </p>
           <div
             class="mt-14 grid gap-px border border-(--color-rule) bg-(--color-rule) md:grid-cols-2"
@@ -250,7 +250,8 @@ const loop = [
           <p
             class="mt-7 max-w-3xl text-base leading-[2] text-(--color-ink-mid)"
           >
-            二つを一つの巨大システムに混ぜません。異なる時間軸と安全要件を持つため、責務を分け、イベントと承認で接続します。
+            Auto
+            JAがほ場と作物を、farm-opsが人と組織を担当。農作業イベント、作業割当、承認、労務実績を相互に接続します。
           </p>
         </div>
       </div>
@@ -352,7 +353,7 @@ const loop = [
                 <p class="mono text-(--color-ink-faint)">Reason</p><p
                   class="mt-2 leading-[1.8] text-(--color-ink-mid)"
                 >
-                  気温上昇率と換気応答の不一致を検出。自動操作ではなく、現地確認を提案。
+                  気温上昇率と換気応答の不一致を検出。第3棟の側窓点検を担当者へ提案。
                 </p>
               </div>
               <div class="flex gap-3 border-t border-(--color-rule) pt-5">
@@ -418,10 +419,10 @@ const loop = [
           <h2
             class="display text-3xl text-(--color-ink) sm:text-5xl lg:text-6xl"
           >
-            モデルの精度も、<br />未完了も、隠さない。
+            研究を、<br />現場の制御へ。
           </h2>
           <p class="mt-7 max-w-3xl leading-[2] text-(--color-ink-mid)">
-            研究コード、ベンチ実装、現地実証は同じ「開発中」ではありません。いま何が動き、どこからが仮説なのかを分けて公開します。
+            群落モデル、温室シミュレーション、分散観測基盤を実装し、実測データと現地運用への接続を進めています。
           </p>
 
           <div class="mt-14 border-t border-(--color-rule-strong)">
@@ -429,25 +430,25 @@ const loop = [
               class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
             >
               <p class="mono text-(--color-accent) sm:col-span-2">
-                Implemented
+                Model implementation
               </p>
               <div class="sm:col-span-4">
                 <h3 class="display text-xl">キュウリ群落モデル</h3><p
                   class="mono mt-2 text-(--color-ink-faint)"
                 >
-                  Research-only
+                  Mechanistic crop model
                 </p>
               </div>
               <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
                 光合成、維持呼吸、ソース・シンク、乾物分配を実装。AGC
-                2018データで残差要因まで検証し、独立holdout前の研究モデルとして管理。
+                2018データを用いて、気候入力と収量推定の残差を評価する。
               </p>
             </div>
             <div
               class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
             >
               <p class="mono text-(--color-accent) sm:col-span-2">
-                Implemented
+                Simulation harness
               </p>
               <div class="sm:col-span-4">
                 <h3 class="display text-xl">温室シミュレーション</h3><p
@@ -463,32 +464,36 @@ const loop = [
             <div
               class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
             >
-              <p class="mono text-(--color-sky) sm:col-span-2">Bench-ready</p>
+              <p class="mono text-(--color-sky) sm:col-span-2">
+                Edge-to-core pipeline
+              </p>
               <div class="sm:col-span-4">
                 <h3 class="display text-xl">分散観測アップリンク</h3><p
                   class="mono mt-2 text-(--color-ink-faint)"
                 >
-                  Field verification pending
+                  Distributed sensing
                 </p>
               </div>
               <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
                 ESP-NOW LR、Raspberry
-                Pi、DuckDB、Tailscale、MQTTの観測経路を実装。農家ハウスでの24時間E2E、72時間commissioning、14日連続観測はこれから。
+                Pi、DuckDB、Tailscale、MQTTを接続し、通信断に耐える環境データ収集経路を構築しています。
               </p>
             </div>
             <div
               class="grid gap-5 border-b border-(--color-rule) py-7 sm:grid-cols-12"
             >
-              <p class="mono text-(--color-soil) sm:col-span-2">Integration</p>
+              <p class="mono text-(--color-soil) sm:col-span-2">
+                Operations integration
+              </p>
               <div class="sm:col-span-4">
                 <h3 class="display text-xl">auto_JA × farm-ops</h3><p
                   class="mono mt-2 text-(--color-ink-faint)"
                 >
-                  Contract defined
+                  Event & approval contract
                 </p>
               </div>
               <p class="leading-[1.9] text-(--color-ink-mid) sm:col-span-6">
-                ほ場イベント、作業割当、労務還流、同意、HITL承認の責務と契約を定義。両システム間の連携実装を進行中。
+                ほ場イベント、作業割当、労務還流、同意、HITL承認の責務とデータ契約を定義し、ほ場と人員管理を接続する。
               </p>
             </div>
           </div>
@@ -508,7 +513,7 @@ const loop = [
             異なる現場で、<br />共通コアの限界を試す。
           </h2>
           <p class="mt-7 max-w-3xl leading-[2] text-(--color-ink-mid)">
-            養殖、養蜂、空間管理、家庭、細胞培養。これらは独立事業の羅列ではなく、知覚・制御・監査の共通アーキテクチャを検証する技術デモです。
+            養殖、養蜂、空間管理、家庭、細胞培養を対象に、知覚・制御・監査の共通アーキテクチャを検証しています。
           </p>
         </div>
       </div>
@@ -567,7 +572,7 @@ const loop = [
           <p
             class="mt-7 max-w-2xl text-base leading-[1.9] text-(--color-paper-deep)/75"
           >
-            温室・農場の観測設計、分散エッジ、モデル検証、HR・承認基盤について。完成品を装うのではなく、現場の制約と検証範囲から話します。
+            温室・農場の観測設計、分散エッジ、モデル検証、HR・承認基盤についてご相談ください。現場条件を伺い、観測対象と検証計画を設計します。
           </p>
         </div>
         <div class="lg:col-span-4 lg:text-right">

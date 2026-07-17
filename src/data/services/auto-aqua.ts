@@ -21,8 +21,8 @@ export const autoAqua: Service = {
       body: "温度・塩分・pH・DO・ORP と YOLOv11 による個体・サイズ分類を統合。異常を多角的に検出。",
     },
     {
-      title: "意図しない自動化を防ぐ Sanitizer",
-      body: "World Model と業務ルールで LLM の過剰な自動アクションを抑止。安全側にフェイルする運用設計。",
+      title: "World Modelと業務ルールによる操作検証",
+      body: "制御候補をWorld Modelと業務ルールで検証し、水質・設備・運用条件を満たす操作をアクチュエータへ送信する。",
     },
     {
       title: "幅広いデバイス対応",
